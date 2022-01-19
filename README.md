@@ -21,6 +21,7 @@ The Scenario Learning component of *SmartSPEC* requires the following:
 * [ruptures](https://ctruong.perso.math.cnrs.fr/ruptures-docs/build/html/index.html) (for break point detection) (version >= 1.1.5)
 * [matplotlib](https://matplotlib.org) (version >= 3.2.2)
 * [MySQL Python Connector](https://dev.mysql.com/doc/connector-python/en) (version >= 8.0.13)
+* [python-rapidjson](https://github.com/python-rapidjson/python-rapidjson) (version >= 1.5)
 
 Note that the majority of these requirements can be fulfilled by installing [Anaconda](https://www.anaconda.com). 
 
@@ -85,8 +86,8 @@ In `filepaths`, each path denotes a relative path to the appropriate file. `plot
 Example:
 ```
 [learners]
-start       = DateStr
-end         = DateStr
+start       = 2017-04-01
+end         = 2017-05-01
 unit        = 5
 validity    = 10
 smooth      = EMA
@@ -665,11 +666,13 @@ There are several different values for the attributes `period` and `period-detai
 To run the Scenario Learning Component: 
 
 Compile: None
+
 Run: `python main.py` in the `scenario-learning` directory
 
 To run the Scenario Generation Component:
 
 Compile: `g++ -std=c++17 main.cpp -o main`
+
 Run: `main <config-file>` in the `scenario-generation` directory
 
 ## Citations: <a id="citations"></a>
