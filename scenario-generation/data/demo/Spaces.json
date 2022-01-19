@@ -1,0 +1,1073 @@
+[
+    {
+        "id": 0,
+        "description": "outside",
+        "capacity": -1,
+        "neighbors": [
+            11001,
+            11002,
+            16001,
+            16002,
+            12001,
+            12002,
+            13001,
+            13002,
+            1,
+            2,
+            5,
+            14201,
+            14221,
+            14231,
+            15003,
+            20923
+        ],
+        "coordinates": [18,18,1]
+    },
+    {
+        "id": 1,
+        "description": "stairs-floor1",
+        "capacity": 10,
+        "neighbors": [
+            2,
+            3,
+            13
+        ],
+        "coordinates": [13,16,1]
+    },
+    {
+        "id": 2,
+        "description": "exit-stairs1",
+        "capacity": 10,
+        "neighbors": [
+            0,
+            1
+        ],
+        "coordinates": [16,14,1]
+    },
+    {
+        "id": 3,
+        "description": "main-lobby1",
+        "capacity": 30,
+        "neighbors": [
+            1,
+            4
+        ],
+        "coordinates": [10,14,1]
+    },
+    {
+        "id": 4,
+        "description": "hallway-main-lobby1",
+        "capacity": 10,
+        "neighbors": [
+            3,
+            5,
+            6
+        ],
+        "coordinates": [12,12,1]
+    },
+    {
+        "id": 5,
+        "description": "exit-main-lobby1",
+        "capacity": 10,
+        "neighbors": [
+            0,
+            4
+        ],
+        "coordinates": [16,13,1]
+    },
+    {
+        "id": 6,
+        "description": "hallway-elevator-1a",
+        "capacity": 10,
+        "neighbors": [
+            4,
+            7,
+            10
+        ],
+        "coordinates": [13,10,1]
+    },
+    {
+        "id": 7,
+        "description": "hallway-elevator-1b",
+        "capacity": 10,
+        "neighbors": [
+            6,
+            8,
+            10
+        ],
+        "coordinates": [14,10,1]
+    },
+    {
+        "id": 8,
+        "description": "elevator1",
+        "capacity": 15,
+        "neighbors": [
+            7
+        ],
+        "coordinates": [13,11,1]
+    },
+    {
+        "id": 9,
+        "description": "restroom1",
+        "capacity": 10,
+        "neighbors": [
+            10
+        ],
+        "coordinates": [11,8,1]
+    },
+    {
+        "id": 10,
+        "description": "hallway-restroom1",
+        "capacity": 10,
+        "neighbors": [
+            9,
+            6,
+            7,
+            11,
+            12
+        ],
+        "coordinates": [12,8,1]
+    },
+    {
+        "id": 11,
+        "description": "lobby-1427-1429",
+        "capacity": 10,
+        "neighbors": [
+            10,
+            14271,
+            14291
+        ],
+        "coordinates": [13,16,1]
+    },
+    {
+        "id": 12,
+        "description": "janitor-closet1",
+        "capacity": 2,
+        "neighbors": [
+            10
+        ],
+        "coordinates": [16,6,1]
+    },
+    {
+        "id": 13,
+        "description": "stairs2",
+        "capacity": 10,
+        "neighbors": [
+            14,
+            1
+        ],
+        "coordinates": [14,15,7]
+    },
+    {
+        "id": 14,
+        "description": "hallway-stairs2",
+        "capacity": 10,
+        "neighbors": [
+            13,
+            20111
+        ],
+        "coordinates": [12,15,7]
+    },
+    {
+        "id": 15,
+        "description": "elevator2",
+        "capacity": 15,
+        "neighbors": [
+            17
+        ],
+        "coordinates": [14,13,7]
+    },
+    {
+        "id": 16,
+        "description": "hallway-elevator2a",
+        "capacity": 10,
+        "neighbors": [
+            20111,
+            18,
+            17,
+            20
+        ],
+        "coordinates": [13,11,7]
+    },
+    {
+        "id": 17,
+        "description": "hallway-elevator2b",
+        "capacity": 10,
+        "neighbors": [
+            16,
+            15
+        ],
+        "coordinates": [15,11,7]
+    },
+    {
+        "id": 18,
+        "description": "main-lobby2",
+        "capacity": 50,
+        "neighbors": [
+            20111,
+            16,
+            20
+        ],
+        "coordinates": [9,12,7]
+    },
+    {
+        "id": 19,
+        "description": "kitchen2",
+        "capacity": 3,
+        "neighbors": [
+            20
+        ],
+        "coordinates": [12,9,7]
+    },
+    {
+        "id": 20,
+        "description": "hallway-kitchen2",
+        "capacity": 10,
+        "neighbors": [
+            18,
+            16,
+            19,
+            22
+        ],
+        "coordinates": [11,9,7]
+    },
+    {
+        "id": 21,
+        "description": "restroom2",
+        "capacity": 10,
+        "neighbors": [
+            22
+        ],
+        "coordinates": [9,8,7]
+    },
+    {
+        "id": 22,
+        "description": "hallway-restroom2",
+        "capacity": 10,
+        "neighbors": [
+            20,
+            21,
+            23,
+            20541
+        ],
+        "coordinates": [12,8,7]
+    },
+    {
+        "id": 23,
+        "description": "janitor-closet2",
+        "capacity": 2,
+        "neighbors": [
+            22
+        ],
+        "coordinates": [11,5,7]
+    },
+    {
+        "id": 1100,
+        "description": "1100",
+        "capacity": 246,
+        "neighbors": [
+            11001,
+            11002
+        ],
+        "coordinates": [20,4,1]
+    },
+    {
+        "id": 1200,
+        "description": "1200",
+        "capacity": 52,
+        "neighbors": [
+            12001,
+            12002
+        ],
+        "coordinates": [23,10,1]
+    },
+    {
+        "id": 1300,
+        "description": "1300",
+        "capacity": 52,
+        "neighbors": [
+            13001,
+            13002
+        ],
+        "coordinates": [20,10,1]
+    },
+    {
+        "id": 1420,
+        "description": "1420",
+        "capacity": 30,
+        "neighbors": [
+            14201
+        ],
+        "coordinates": [3,11,1]
+    },
+    {
+        "id": 1422,
+        "description": "1422",
+        "capacity": 30,
+        "neighbors": [
+            14221
+        ],
+        "coordinates": [3,8,1]
+    },
+    {
+        "id": 1423,
+        "description": "1423",
+        "capacity": 30,
+        "neighbors": [
+            14232
+        ],
+        "coordinates": [3,3,1]
+    },
+    {
+        "id": 1425,
+        "description": "1425",
+        "capacity": 30,
+        "neighbors": [
+            14251
+        ],
+        "coordinates": [8,3,1]
+    },
+    {
+        "id": 1427,
+        "description": "1427",
+        "capacity": 30,
+        "neighbors": [
+            14271
+        ],
+        "coordinates": [12,3,1]
+    },
+    {
+        "id": 1429,
+        "description": "1429",
+        "capacity": 30,
+        "neighbors": [
+            14291
+        ],
+        "coordinates": [16,3,1]
+    },
+    {
+        "id": 1431,
+        "description": "1431",
+        "capacity": 30,
+        "neighbors": [
+            14311
+        ],
+        "coordinates": [20,3,1]
+    },
+    {
+        "id": 1433,
+        "description": "1433",
+        "capacity": 30,
+        "neighbors": [
+            14311
+        ],
+        "coordinates": [24,3,1]
+    },
+    {
+        "id": 1500,
+        "description": "1500",
+        "capacity": 65,
+        "neighbors": [
+            15001,
+            15002
+        ],
+        "coordinates": [22,8,1]
+    },
+    {
+        "id": 1600,
+        "description": "1600",
+        "capacity": 124,
+        "neighbors": [
+            16001,
+            16002
+        ],
+        "coordinates": [28,7,1]
+    },
+    {
+        "id": 2011,
+        "description": "2011",
+        "capacity": 50,
+        "neighbors": [
+            20111
+        ],
+        "coordinates": [11,18,7]
+    },
+    {
+        "id": 2048,
+        "description": "2048",
+        "capacity": 7,
+        "neighbors": [
+            20481
+        ],
+        "coordinates": [9,3,7]
+    },
+    {
+        "id": 2051,
+        "description": "2051",
+        "capacity": 10,
+        "neighbors": [
+            20581
+        ],
+        "coordinates": [14,6,7]
+    },
+    {
+        "id": 2052,
+        "description": "2052",
+        "capacity": 7,
+        "neighbors": [
+            20521
+        ],
+        "coordinates": [11,3,7]
+    },
+    {
+        "id": 2054,
+        "description": "2054",
+        "capacity": 7,
+        "neighbors": [
+            20541
+        ],
+        "coordinates": [12,3,7]
+    },
+    {
+        "id": 2056,
+        "description": "2056",
+        "capacity": 7,
+        "neighbors": [
+            20561
+        ],
+        "coordinates": [13,3,7]
+    },
+    {
+        "id": 2058,
+        "description": "2058",
+        "capacity": 7,
+        "neighbors": [
+            20581
+        ],
+        "coordinates": [15,3,7]
+    },
+    {
+        "id": 2059,
+        "description": "2059",
+        "capacity": 20,
+        "neighbors": [
+            20641,
+            2069
+        ],
+        "coordinates": [17,7,7]
+    },
+    {
+        "id": 2061,
+        "description": "2061",
+        "capacity": 20,
+        "neighbors": [
+            20661,
+            20681,
+            2069
+        ],
+        "coordinates": [20,6,7]
+    },
+    {
+        "id": 2062,
+        "description": "2062",
+        "capacity": 7,
+        "neighbors": [
+            20621
+        ],
+        "coordinates": [17,3,7]
+    },
+    {
+        "id": 2064,
+        "description": "2064",
+        "capacity": 7,
+        "neighbors": [
+            20641
+        ],
+        "coordinates": [18,3,7]
+    },
+    {
+        "id": 2065,
+        "description": "2065",
+        "capacity": 20,
+        "neighbors": [
+            20721
+        ],
+        "coordinates": [23,7,7]
+    },
+    {
+        "id": 2066,
+        "description": "2066",
+        "capacity": 7,
+        "neighbors": [
+            20661
+        ],
+        "coordinates": [20,3,7]
+    },
+    {
+        "id": 2068,
+        "description": "2068",
+        "capacity": 7,
+        "neighbors": [
+            20681
+        ],
+        "coordinates": [21,3,7]
+    },
+    {
+        "id": 2069,
+        "description": "2069",
+        "capacity": 12,
+        "neighbors": [
+            2059,
+            2061,
+            2099
+        ],
+        "coordinates": [20,10,7]
+    },
+    {
+        "id": 2072,
+        "description": "2072",
+        "capacity": 7,
+        "neighbors": [
+            20721
+        ],
+        "coordinates": [23,3,7]
+    },
+    {
+        "id": 2074,
+        "description": "2074",
+        "capacity": 7,
+        "neighbors": [
+            20741
+        ],
+        "coordinates": [24,3,7]
+    },
+    {
+        "id": 2076,
+        "description": "2076",
+        "capacity": 7,
+        "neighbors": [
+            20761
+        ],
+        "coordinates": [26,3,7]
+    },
+    {
+        "id": 2081,
+        "description": "2081",
+        "capacity": 5,
+        "neighbors": [
+            20761
+        ],
+        "coordinates": [26,7,7]
+    },
+    {
+        "id": 2082,
+        "description": "2082",
+        "capacity": 12,
+        "neighbors": [
+            20821
+        ],
+        "coordinates": [29,4,7]
+    },
+    {
+        "id": 2084,
+        "description": "2084",
+        "capacity": 7,
+        "neighbors": [
+            20841
+        ],
+        "coordinates": [29,6,7]
+    },
+    {
+        "id": 2086,
+        "description": "2086",
+        "capacity": 7,
+        "neighbors": [
+            20861
+        ],
+        "coordinates": [29,8,7]
+    },
+    {
+        "id": 2088,
+        "description": "2088",
+        "capacity": 7,
+        "neighbors": [
+            20881
+        ],
+        "coordinates": [29,9,7]
+    },
+    {
+        "id": 2089,
+        "description": "2089",
+        "capacity": 6,
+        "neighbors": [
+            2099
+        ],
+        "coordinates": [26,8,7]
+    },
+    {
+        "id": 2091,
+        "description": "2091",
+        "capacity": 12,
+        "neighbors": [
+            20911
+        ],
+        "coordinates": [26,12,7]
+    },
+    {
+        "id": 2092,
+        "description": "2092",
+        "capacity": 7,
+        "neighbors": [
+            20921
+        ],
+        "coordinates": [29,11,7]
+    },
+    {
+        "id": 2099,
+        "description": "2099",
+        "capacity": 16,
+        "neighbors": [
+            2069,
+            2089,
+            20911
+        ],
+        "coordinates": [24,11,7]
+    },
+    {
+        "id": 11001,
+        "description": "exit-1100a",
+        "capacity": 10,
+        "neighbors": [
+            0,
+            1100
+        ],
+        "coordinates": [1,26,1]
+    },
+    {
+        "id": 11002,
+        "description": "exit-1100b",
+        "capacity": 10,
+        "neighbors": [
+            0,
+            1100
+        ],
+        "coordinates": [7,26,1]
+    },
+    {
+        "id": 12001,
+        "description": "exit-1200a",
+        "capacity": 10,
+        "neighbors": [
+            0,
+            1200
+        ],
+        "coordinates": [9,27,1]
+    },
+    {
+        "id": 12002,
+        "description": "exit-1200b",
+        "capacity": 10,
+        "neighbors": [
+            0,
+            1200
+        ],
+        "coordinates": [13,22,1]
+    },
+    {
+        "id": 13001,
+        "description": "exit-1300a",
+        "capacity": 10,
+        "neighbors": [
+            0,
+            1300
+        ],
+        "coordinates": [13,21,1]
+    },
+    {
+        "id": 13002,
+        "description": "exit-1300b",
+        "capacity": 10,
+        "neighbors": [
+            0,
+            1300
+        ],
+        "coordinates": [13,16,1]
+    },
+    {
+        "id": 14201,
+        "description": "exit-1420",
+        "capacity": 10,
+        "neighbors": [
+            0,
+            1420
+        ],
+        "coordinates": [1,12,1]
+    },
+    {
+        "id": 14221,
+        "description": "exit-1422",
+        "capacity": 10,
+        "neighbors": [
+            0,
+            1422
+        ],
+        "coordinates": [1,8,1]
+    },
+    {
+        "id": 14231,
+        "description": "exit-1423",
+        "capacity": 10,
+        "neighbors": [
+            0,
+            14232
+        ],
+        "coordinates": [3,4,1]
+    },
+    {
+        "id": 14232,
+        "description": "hallway-1423",
+        "capacity": 10,
+        "neighbors": [
+            1423,
+            14231,
+            14251
+        ],
+        "coordinates": [4,5,1]
+    },
+    {
+        "id": 14251,
+        "description": "hallway-1425",
+        "capacity": 10,
+        "neighbors": [
+            14232,
+            1425,
+            14271
+        ],
+        "coordinates": [8,5,1]
+    },
+    {
+        "id": 14271,
+        "description": "hallway-1427",
+        "capacity": 10,
+        "neighbors": [
+            14251,
+            1427,
+            14291,
+            11
+        ],
+        "coordinates": [12,5,1]
+    },
+    {
+        "id": 14291,
+        "description": "hallway-1429",
+        "capacity": 10,
+        "neighbors": [
+            14271,
+            1429,
+            14311,
+            11
+        ],
+        "coordinates": [16,5,1]
+    },
+    {
+        "id": 14311,
+        "description": "hallway-1431",
+        "capacity": 10,
+        "neighbors": [
+            14291,
+            1431,
+            1433,
+            15002
+        ],
+        "coordinates": [20,5,1]
+    },
+    {
+        "id": 15001,
+        "description": "hallway-1500a",
+        "capacity": 10,
+        "neighbors": [
+            1500,
+            15002,
+            15003
+        ],
+        "coordinates": [19,10,1]
+    },
+    {
+        "id": 15002,
+        "description": "hallway-1500b",
+        "capacity": 10,
+        "neighbors": [
+            1500,
+            15001,
+            14311
+        ],
+        "coordinates": [19,6,1]
+    },
+    {
+        "id": 15003,
+        "description": "exit-1500",
+        "capacity": 10,
+        "neighbors": [
+            0,
+            15001
+        ],
+        "coordinates": [20,6,1]
+    },
+    {
+        "id": 16001,
+        "description": "exit-1600a",
+        "capacity": 10,
+        "neighbors": [
+            0,
+            1600
+        ],
+        "coordinates": [26,11,1]
+    },
+    {
+        "id": 16002,
+        "description": "exit-1600b",
+        "capacity": 10,
+        "neighbors": [
+            0,
+            1600
+        ],
+        "coordinates": [31,11,1]
+    },
+    {
+        "id": 20111,
+        "description": "hallway-2011",
+        "capacity": 10,
+        "neighbors": [
+            2011,
+            14,
+            18,
+            16
+        ],
+        "coordinates": [11,15,7]
+    },
+    {
+        "id": 20481,
+        "description": "hallway-2048",
+        "capacity": 10,
+        "neighbors": [
+            2048,
+            20521
+        ],
+        "coordinates": [9,4,7]
+    },
+    {
+        "id": 20521,
+        "description": "hallway-2052",
+        "capacity": 10,
+        "neighbors": [
+            20481,
+            2052,
+            20541
+        ],
+        "coordinates": [10,4,7]
+    },
+    {
+        "id": 20541,
+        "description": "hallway-2054",
+        "capacity": 10,
+        "neighbors": [
+            20521,
+            2054,
+            20561,
+            22
+        ],
+        "coordinates": [12,4,7]
+    },
+    {
+        "id": 20561,
+        "description": "hallway-2056",
+        "capacity": 10,
+        "neighbors": [
+            20541,
+            2056,
+            20581
+        ],
+        "coordinates": [14,4,7]
+    },
+    {
+        "id": 20581,
+        "description": "hallway-2058",
+        "capacity": 10,
+        "neighbors": [
+            20561,
+            2058,
+            20621,
+            2051
+        ],
+        "coordinates": [15,4,7]
+    },
+    {
+        "id": 20621,
+        "description": "hallway-2062",
+        "capacity": 10,
+        "neighbors": [
+            20581,
+            2062,
+            20641
+        ],
+        "coordinates": [17,4,7]
+    },
+    {
+        "id": 20641,
+        "description": "hallway-2064",
+        "capacity": 10,
+        "neighbors": [
+            20621,
+            2064,
+            20661,
+            2059
+        ],
+        "coordinates": [18,4,7]
+    },
+    {
+        "id": 20661,
+        "description": "hallway-2066",
+        "capacity": 10,
+        "neighbors": [
+            20641,
+            2066,
+            20681,
+            2061
+        ],
+        "coordinates": [20,4,7]
+    },
+    {
+        "id": 20681,
+        "description": "hallway-2068",
+        "capacity": 10,
+        "neighbors": [
+            20661,
+            2068,
+            20721,
+            2061
+        ],
+        "coordinates": [21,4,7]
+    },
+    {
+        "id": 20721,
+        "description": "hallway-2072",
+        "capacity": 10,
+        "neighbors": [
+            20681,
+            2072,
+            20741,
+            2065
+        ],
+        "coordinates": [23,4,7]
+    },
+    {
+        "id": 20741,
+        "description": "hallway-2074",
+        "capacity": 10,
+        "neighbors": [
+            20721,
+            2074,
+            20761
+        ],
+        "coordinates": [24,4,7]
+    },
+    {
+        "id": 20761,
+        "description": "hallway-2076",
+        "capacity": 10,
+        "neighbors": [
+            20741,
+            2076,
+            20821,
+            2081
+        ],
+        "coordinates": [26,5,7]
+    },
+    {
+        "id": 20821,
+        "description": "hallway-2082",
+        "capacity": 10,
+        "neighbors": [
+            20761,
+            2082,
+            20841
+        ],
+        "coordinates": [28,5,7]
+    },
+    {
+        "id": 20841,
+        "description": "hallway-2084",
+        "capacity": 10,
+        "neighbors": [
+            20821,
+            2084,
+            20861
+        ],
+        "coordinates": [28,6,7]
+    },
+    {
+        "id": 20861,
+        "description": "hallway-2086",
+        "capacity": 10,
+        "neighbors": [
+            20841,
+            2086,
+            20881
+        ],
+        "coordinates": [28,7,7]
+    },
+    {
+        "id": 20881,
+        "description": "hallway-2088",
+        "capacity": 10,
+        "neighbors": [
+            20861,
+            2088,
+            20921
+        ],
+        "coordinates": [28,9,7]
+    },
+    {
+        "id": 20911,
+        "description": "hallway-2091",
+        "capacity": 10,
+        "neighbors": [
+            2091,
+            2099,
+            20921
+        ],
+        "coordinates": [26,9,7]
+    },
+    {
+        "id": 20921,
+        "description": "hallway-2092",
+        "capacity": 10,
+        "neighbors": [
+            20881,
+            2092,
+            20922,
+            20911
+        ],
+        "coordinates": [29,11,7]
+    },
+    {
+        "id": 20922,
+        "description": "stairs-2092",
+        "capacity": 10,
+        "neighbors": [
+            20921,
+            20923
+        ],
+        "coordinates": [28,12,7]
+    },
+    {
+        "id": 20923,
+        "description": "exit-2092",
+        "capacity": 10,
+        "neighbors": [
+            0,
+            20922
+        ],
+        "coordinates": [30,12,7]
+    }
+]

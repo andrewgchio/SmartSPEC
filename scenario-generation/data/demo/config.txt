@@ -1,0 +1,22 @@
+[people]
+number = 100
+generation = all
+
+[events]
+number = 540
+generation = diff
+
+[synthetic-data-generator]
+start = 2020-01-01
+end   = 2020-04-01
+
+[filepaths]
+metapeople          = data/demo/MetaPeople.json
+metaevents          = data/demo/MetaEvents.json
+people              = data/demo/People.json
+events              = data/demo/Events.json
+sensors             = data/demo/Sensors.json
+spaces              = data/demo/Spaces.json
+output              = data/demo/output/
+generated-files     = data/demo/
+shortest-path-cache = data/demo/output/shortest-path-cache.csv

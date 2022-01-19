@@ -1,0 +1,1045 @@
+[
+    {
+        "id": 0,
+        "description": "lower-div-ugrad",
+        "probability": 1600.0,
+        "event-affinity": [
+            {
+                "metaevent-id": 0,
+                "probability": 15.0
+            },
+            {
+                "metaevent-id": 1,
+                "probability": 15.0
+            },
+            {
+                "metaevent-id": 2,
+                "probability": 25.0
+            },
+            {
+                "metaevent-id": 8,
+                "probability": 20.0
+            },
+            {
+                "metaevent-id": 16,
+                "probability": 5.0
+            },
+            {
+                "metaevent-id": 17,
+                "probability": 5.0
+            },
+            {
+                "metaevent-id": 20,
+                "probability": 15.0
+            }
+        ],
+        "time-profiles": [
+            {
+                "probability": 1.0,
+                "profile": [
+                    {
+                        "pattern": {
+                            "start-date": "2020-01-01",
+                            "end-date": "2020-04-01",
+                            "period": "week",
+                            "period-details": {
+                                "days-of-week": [
+                                    1,
+                                    3,
+                                    5
+                                ]
+                            }
+                        },
+                        "duration": {
+                            "start-time": [
+                                "08:00:00",
+                                "00:10:00"
+                            ],
+                            "end-time": [
+                                "18:00:00",
+                                "00:10:00"
+                            ],
+                            "required": [
+                                "04:00:00",
+                                "00:10:00"
+                            ]
+                        }
+                    },
+                    {
+                        "pattern": {
+                            "start-date": "2020-01-01",
+                            "end-date": "2020-04-01",
+                            "period": "week",
+                            "period-details": {
+                                "days-of-week": [
+                                    2,
+                                    4
+                                ]
+                            }
+                        },
+                        "duration": {
+                            "start-time": [
+                                "08:00:00",
+                                "00:10:00"
+                            ],
+                            "end-time": [
+                                "18:00:00",
+                                "00:10:00"
+                            ],
+                            "required": [
+                                "04:00:00",
+                                "00:10:00"
+                            ]
+                        }
+                    },
+                    {
+                        "pattern": {
+                            "start-date": "2020-01-01",
+                            "end-date": "2020-04-01",
+                            "period": "week",
+                            "period-details": {
+                                "days-of-week": [
+                                    0,
+                                    6
+                                ]
+                            }
+                        },
+                        "duration": {
+                            "start-time": [
+                                "08:00:00",
+                                "01:00:00"
+                            ],
+                            "end-time": [
+                                "21:00:00",
+                                "00:10:00"
+                            ],
+                            "required": [
+                                "02:00:00",
+                                "00:10:00"
+                            ]
+                        }
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": 1,
+        "description": "upper-div-ugrad",
+        "probability": 2000.0,
+        "event-affinity": [
+            {
+                "metaevent-id": 3,
+                "probability": 10.0
+            },
+            {
+                "metaevent-id": 4,
+                "probability": 10.0
+            },
+            {
+                "metaevent-id": 5,
+                "probability": 15.0
+            },
+            {
+                "metaevent-id": 9,
+                "probability": 15.0
+            },
+            {
+                "metaevent-id": 11,
+                "probability": 20.0
+            },
+            {
+                "metaevent-id": 16,
+                "probability": 5.0
+            },
+            {
+                "metaevent-id": 17,
+                "probability": 5.0
+            },
+            {
+                "metaevent-id": 20,
+                "probability": 20.0
+            }
+        ],
+        "time-profiles": [
+            {
+                "probability": 1.0,
+                "profile": [
+                    {
+                        "pattern": {
+                            "start-date": "2020-01-01",
+                            "end-date": "2020-04-01",
+                            "period": "week",
+                            "period-details": {
+                                "days-of-week": [
+                                    1,
+                                    3,
+                                    5
+                                ]
+                            }
+                        },
+                        "duration": {
+                            "start-time": [
+                                "08:00:00",
+                                "00:10:00"
+                            ],
+                            "end-time": [
+                                "18:00:00",
+                                "00:10:00"
+                            ],
+                            "required": [
+                                "04:00:00",
+                                "00:10:00"
+                            ]
+                        }
+                    },
+                    {
+                        "pattern": {
+                            "start-date": "2020-01-01",
+                            "end-date": "2020-04-01",
+                            "period": "week",
+                            "period-details": {
+                                "days-of-week": [
+                                    2,
+                                    4
+                                ]
+                            }
+                        },
+                        "duration": {
+                            "start-time": [
+                                "08:00:00",
+                                "00:10:00"
+                            ],
+                            "end-time": [
+                                "18:00:00",
+                                "00:10:00"
+                            ],
+                            "required": [
+                                "04:00:00",
+                                "00:10:00"
+                            ]
+                        }
+                    },
+                    {
+                        "pattern": {
+                            "start-date": "2020-01-01",
+                            "end-date": "2020-04-01",
+                            "period": "week",
+                            "period-details": {
+                                "days-of-week": [
+                                    0,
+                                    6
+                                ]
+                            }
+                        },
+                        "duration": {
+                            "start-time": [
+                                "08:00:00",
+                                "01:00:00"
+                            ],
+                            "end-time": [
+                                "21:00:00",
+                                "00:10:00"
+                            ],
+                            "required": [
+                                "02:00:00",
+                                "00:10:00"
+                            ]
+                        }
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "description": "masters",
+        "probability": 500.0,
+        "event-affinity": [
+            {
+                "metaevent-id": 1,
+                "probability": 5.0
+            },
+            {
+                "metaevent-id": 4,
+                "probability": 5.0
+            },
+            {
+                "metaevent-id": 6,
+                "probability": 20.0
+            },
+            {
+                "metaevent-id": 7,
+                "probability": 10.0
+            },
+            {
+                "metaevent-id": 10,
+                "probability": 15.0
+            },
+            {
+                "metaevent-id": 12,
+                "probability": 30.0
+            },
+            {
+                "metaevent-id": 20,
+                "probability": 15.0
+            }
+        ],
+        "time-profiles": [
+            {
+                "probability": 1.0,
+                "profile": [
+                    {
+                        "pattern": {
+                            "start-date": "2020-01-01",
+                            "end-date": "2020-04-01",
+                            "period": "week",
+                            "period-details": {
+                                "days-of-week": [
+                                    1,
+                                    3,
+                                    5
+                                ]
+                            }
+                        },
+                        "duration": {
+                            "start-time": [
+                                "09:30:00",
+                                "00:10:00"
+                            ],
+                            "end-time": [
+                                "20:00:00",
+                                "00:10:00"
+                            ],
+                            "required": [
+                                "04:00:00",
+                                "00:10:00"
+                            ]
+                        }
+                    },
+                    {
+                        "pattern": {
+                            "start-date": "2020-01-01",
+                            "end-date": "2020-04-01",
+                            "period": "week",
+                            "period-details": {
+                                "days-of-week": [
+                                    2,
+                                    4
+                                ]
+                            }
+                        },
+                        "duration": {
+                            "start-time": [
+                                "09:30:00",
+                                "00:10:00"
+                            ],
+                            "end-time": [
+                                "20:00:00",
+                                "00:10:00"
+                            ],
+                            "required": [
+                                "04:00:00",
+                                "00:10:00"
+                            ]
+                        }
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "description": "phd",
+        "probability": 350.0,
+        "event-affinity": [
+            {
+                "metaevent-id": 1,
+                "probability": 5.0
+            },
+            {
+                "metaevent-id": 4,
+                "probability": 5.0
+            },
+            {
+                "metaevent-id": 6,
+                "probability": 5.0
+            },
+            {
+                "metaevent-id": 7,
+                "probability": 10.0
+            },
+            {
+                "metaevent-id": 10,
+                "probability": 5.0
+            },
+            {
+                "metaevent-id": 12,
+                "probability": 5.0
+            },
+            {
+                "metaevent-id": 13,
+                "probability": 15.0
+            },
+            {
+                "metaevent-id": 14,
+                "probability": 5.0
+            },
+            {
+                "metaevent-id": 15,
+                "probability": 30.0
+            },
+            {
+                "metaevent-id": 17,
+                "probability": 5.0
+            },
+            {
+                "metaevent-id": 20,
+                "probability": 10.0
+            }
+        ],
+        "time-profiles": [
+            {
+                "probability": 1.0,
+                "profile": [
+                    {
+                        "pattern": {
+                            "start-date": "2020-01-01",
+                            "end-date": "2020-04-01",
+                            "period": "week",
+                            "period-details": {
+                                "days-of-week": [
+                                    1,
+                                    2,
+                                    3,
+                                    4,
+                                    5
+                                ]
+                            }
+                        },
+                        "duration": {
+                            "start-time": [
+                                "08:00:00",
+                                "01:00:00"
+                            ],
+                            "end-time": [
+                                "21:00:00",
+                                "00:10:00"
+                            ],
+                            "required": [
+                                "05:00:00",
+                                "00:10:00"
+                            ]
+                        }
+                    },
+                    {
+                        "pattern": {
+                            "start-date": "2020-01-01",
+                            "end-date": "2020-04-01",
+                            "period": "week",
+                            "period-details": {
+                                "days-of-week": [
+                                    0,
+                                    6
+                                ]
+                            }
+                        },
+                        "duration": {
+                            "start-time": [
+                                "08:00:00",
+                                "01:00:00"
+                            ],
+                            "end-time": [
+                                "21:00:00",
+                                "00:10:00"
+                            ],
+                            "required": [
+                                "02:00:00",
+                                "00:10:00"
+                            ]
+                        }
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": 4,
+        "description": "postdoc",
+        "probability": 30.0,
+        "event-affinity": [
+            {
+                "metaevent-id": 0,
+                "probability": 5.0
+            },
+            {
+                "metaevent-id": 2,
+                "probability": 5.0
+            },
+            {
+                "metaevent-id": 3,
+                "probability": 5.0
+            },
+            {
+                "metaevent-id": 5,
+                "probability": 5.0
+            },
+            {
+                "metaevent-id": 7,
+                "probability": 10.0
+            },
+            {
+                "metaevent-id": 13,
+                "probability": 25.0
+            },
+            {
+                "metaevent-id": 14,
+                "probability": 25.0
+            },
+            {
+                "metaevent-id": 20,
+                "probability": 20.0
+            }
+        ],
+        "time-profiles": [
+            {
+                "probability": 1.0,
+                "profile": [
+                    {
+                        "pattern": {
+                            "start-date": "2020-01-01",
+                            "end-date": "2020-04-01",
+                            "period": "week",
+                            "period-details": {
+                                "days-of-week": [
+                                    1,
+                                    2,
+                                    3,
+                                    4,
+                                    5
+                                ]
+                            }
+                        },
+                        "duration": {
+                            "start-time": [
+                                "08:00:00",
+                                "01:00:00"
+                            ],
+                            "end-time": [
+                                "21:00:00",
+                                "00:10:00"
+                            ],
+                            "required": [
+                                "08:00:00",
+                                "00:10:00"
+                            ]
+                        }
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": 5,
+        "description": "lecturer",
+        "probability": 35.0,
+        "event-affinity": [
+            {
+                "metaevent-id": 0,
+                "probability": 30.0
+            },
+            {
+                "metaevent-id": 2,
+                "probability": 30.0
+            },
+            {
+                "metaevent-id": 3,
+                "probability": 5.0
+            },
+            {
+                "metaevent-id": 5,
+                "probability": 5.0
+            },
+            {
+                "metaevent-id": 16,
+                "probability": 20.0
+            },
+            {
+                "metaevent-id": 20,
+                "probability": 10.0
+            }
+        ],
+        "time-profiles": [
+            {
+                "probability": 1.0,
+                "profile": [
+                    {
+                        "pattern": {
+                            "start-date": "2020-01-01",
+                            "end-date": "2020-04-01",
+                            "period": "week",
+                            "period-details": {
+                                "days-of-week": [
+                                    1,
+                                    3,
+                                    5
+                                ]
+                            }
+                        },
+                        "duration": {
+                            "start-time": [
+                                "08:00:00",
+                                "01:00:00"
+                            ],
+                            "end-time": [
+                                "18:00:00",
+                                "00:10:00"
+                            ],
+                            "required": [
+                                "04:00:00",
+                                "00:10:00"
+                            ]
+                        }
+                    },
+                    {
+                        "pattern": {
+                            "start-date": "2020-01-01",
+                            "end-date": "2020-04-01",
+                            "period": "week",
+                            "period-details": {
+                                "days-of-week": [
+                                    2,
+                                    4
+                                ]
+                            }
+                        },
+                        "duration": {
+                            "start-time": [
+                                "08:00:00",
+                                "01:00:00"
+                            ],
+                            "end-time": [
+                                "18:00:00",
+                                "00:10:00"
+                            ],
+                            "required": [
+                                "04:00:00",
+                                "00:10:00"
+                            ]
+                        }
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": 6,
+        "description": "professor",
+        "probability": 65.0,
+        "event-affinity": [
+            {
+                "metaevent-id": 0,
+                "probability": 5.0
+            },
+            {
+                "metaevent-id": 2,
+                "probability": 5.0
+            },
+            {
+                "metaevent-id": 3,
+                "probability": 10.0
+            },
+            {
+                "metaevent-id": 5,
+                "probability": 10.0
+            },
+            {
+                "metaevent-id": 6,
+                "probability": 10.0
+            },
+            {
+                "metaevent-id": 7,
+                "probability": 10.0
+            },
+            {
+                "metaevent-id": 13,
+                "probability": 20.0
+            },
+            {
+                "metaevent-id": 14,
+                "probability": 20.0
+            },
+            {
+                "metaevent-id": 16,
+                "probability": 5.0
+            },
+            {
+                "metaevent-id": 20,
+                "probability": 5.0
+            }
+        ],
+        "time-profiles": [
+            {
+                "probability": 1.0,
+                "profile": [
+                    {
+                        "pattern": {
+                            "start-date": "2020-01-01",
+                            "end-date": "2020-04-01",
+                            "period": "week",
+                            "period-details": {
+                                "days-of-week": [
+                                    1,
+                                    2,
+                                    3,
+                                    4,
+                                    5
+                                ]
+                            }
+                        },
+                        "duration": {
+                            "start-time": [
+                                "08:00:00",
+                                "00:30:00"
+                            ],
+                            "end-time": [
+                                "18:00:00",
+                                "00:30:00"
+                            ],
+                            "required": [
+                                "05:00:00",
+                                "00:10:00"
+                            ]
+                        }
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": 7,
+        "description": "janitor",
+        "probability": 100.0,
+        "event-affinity": [
+            {
+                "metaevent-id": 18,
+                "probability": 80.0
+            },
+            {
+                "metaevent-id": 20,
+                "probability": 20.0
+            }
+        ],
+        "time-profiles": [
+            {
+                "probability": 1.0,
+                "profile": [
+                    {
+                        "pattern": {
+                            "start-date": "2020-01-01",
+                            "end-date": "2020-04-01",
+                            "period": "week",
+                            "period-details": {
+                                "days-of-week": [
+                                    1,
+                                    4
+                                ]
+                            }
+                        },
+                        "duration": {
+                            "start-time": [
+                                "08:00:00",
+                                "01:00:00"
+                            ],
+                            "end-time": [
+                                "21:00:00",
+                                "01:00:00"
+                            ],
+                            "required": [
+                                "02:00:00",
+                                "00:10:00"
+                            ]
+                        }
+                    },
+                    {
+                        "pattern": {
+                            "start-date": "2020-01-01",
+                            "end-date": "2020-04-01",
+                            "period": "week",
+                            "period-details": {
+                                "days-of-week": [
+                                    2,
+                                    5
+                                ]
+                            }
+                        },
+                        "duration": {
+                            "start-time": [
+                                "08:00:00",
+                                "01:00:00"
+                            ],
+                            "end-time": [
+                                "21:00:00",
+                                "01:00:00"
+                            ],
+                            "required": [
+                                "02:00:00",
+                                "00:10:00"
+                            ]
+                        }
+                    },
+                    {
+                        "pattern": {
+                            "start-date": "2020-01-01",
+                            "end-date": "2020-04-01",
+                            "period": "week",
+                            "period-details": {
+                                "days-of-week": [
+                                    3
+                                ]
+                            }
+                        },
+                        "duration": {
+                            "start-time": [
+                                "08:00:00",
+                                "01:00:00"
+                            ],
+                            "end-time": [
+                                "21:00:00",
+                                "01:00:00"
+                            ],
+                            "required": [
+                                "02:00:00",
+                                "00:10:00"
+                            ]
+                        }
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": 8,
+        "description": "administration",
+        "probability": 50.0,
+        "event-affinity": [
+            {
+                "metaevent-id": 19,
+                "probability": 80.0
+            },
+            {
+                "metaevent-id": 20,
+                "probability": 20.0
+            }
+        ],
+        "time-profiles": [
+            {
+                "probability": 1.0,
+                "profile": [
+                    {
+                        "pattern": {
+                            "start-date": "2020-01-01",
+                            "end-date": "2020-04-01",
+                            "period": "week",
+                            "period-details": {
+                                "days-of-week": [
+                                    1,
+                                    2,
+                                    3,
+                                    4,
+                                    5
+                                ]
+                            }
+                        },
+                        "duration": {
+                            "start-time": [
+                                "09:30:00",
+                                "01:00:00"
+                            ],
+                            "end-time": [
+                                "16:00:00",
+                                "01:00:00"
+                            ],
+                            "required": [
+                                "05:00:00",
+                                "00:10:00"
+                            ]
+                        }
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": 9,
+        "description": "guest",
+        "probability": 20.0,
+        "event-affinity": [
+            {
+                "metaevent-id": 7,
+                "probability": 50.0
+            },
+            {
+                "metaevent-id": 20,
+                "probability": 50.0
+            }
+        ],
+        "time-profiles": [
+            {
+                "probability": 1.0,
+                "profile": [
+                    {
+                        "pattern": {
+                            "start-date": "2020-01-01",
+                            "end-date": "2020-04-01",
+                            "period": "week",
+                            "period-details": {
+                                "days-of-week": [
+                                    1
+                                ]
+                            }
+                        },
+                        "duration": {
+                            "start-time": [
+                                "10:00:00",
+                                "01:00:00"
+                            ],
+                            "end-time": [
+                                "16:00:00",
+                                "01:00:00"
+                            ],
+                            "required": [
+                                "01:30:00",
+                                "00:10:00"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "probability": 1.0,
+                "profile": [
+                    {
+                        "pattern": {
+                            "start-date": "2020-01-01",
+                            "end-date": "2020-04-01",
+                            "period": "week",
+                            "period-details": {
+                                "days-of-week": [
+                                    2
+                                ]
+                            }
+                        },
+                        "duration": {
+                            "start-time": [
+                                "10:00:00",
+                                "01:00:00"
+                            ],
+                            "end-time": [
+                                "16:00:00",
+                                "01:00:00"
+                            ],
+                            "required": [
+                                "01:30:00",
+                                "00:10:00"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "probability": 1.0,
+                "profile": [
+                    {
+                        "pattern": {
+                            "start-date": "2020-01-01",
+                            "end-date": "2020-04-01",
+                            "period": "week",
+                            "period-details": {
+                                "days-of-week": [
+                                    3
+                                ]
+                            }
+                        },
+                        "duration": {
+                            "start-time": [
+                                "10:00:00",
+                                "01:00:00"
+                            ],
+                            "end-time": [
+                                "16:00:00",
+                                "01:00:00"
+                            ],
+                            "required": [
+                                "01:30:00",
+                                "00:10:00"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "probability": 1.0,
+                "profile": [
+                    {
+                        "pattern": {
+                            "start-date": "2020-01-01",
+                            "end-date": "2020-04-01",
+                            "period": "week",
+                            "period-details": {
+                                "days-of-week": [
+                                    4
+                                ]
+                            }
+                        },
+                        "duration": {
+                            "start-time": [
+                                "10:00:00",
+                                "01:00:00"
+                            ],
+                            "end-time": [
+                                "16:00:00",
+                                "01:00:00"
+                            ],
+                            "required": [
+                                "01:30:00",
+                                "00:10:00"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "probability": 1.0,
+                "profile": [
+                    {
+                        "pattern": {
+                            "start-date": "2020-01-01",
+                            "end-date": "2020-04-01",
+                            "period": "week",
+                            "period-details": {
+                                "days-of-week": [
+                                    5
+                                ]
+                            }
+                        },
+                        "duration": {
+                            "start-time": [
+                                "10:00:00",
+                                "01:00:00"
+                            ],
+                            "end-time": [
+                                "16:00:00",
+                                "01:00:00"
+                            ],
+                            "required": [
+                                "01:30:00",
+                                "00:10:00"
+                            ]
+                        }
+                    }
+                ]
+            }
+        ]
+    }
+]
