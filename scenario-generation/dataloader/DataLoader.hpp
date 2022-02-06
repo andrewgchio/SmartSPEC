@@ -21,6 +21,9 @@ public:
 
     explicit DataLoader(const Filename& fname);
 
+    void loadEvents();
+    void loadPeople();
+
     // Query functions
     TimePeriod query(const Person& p, const date::sys_days& d);
     TimePeriod query(const Person& p, const DateTime& dt);
@@ -55,6 +58,12 @@ DataLoader::DataLoader(const Filename& fname)
       start{config("synthetic-data-generator","start")},
       end{config("synthetic-data-generator","end")}
 {}
+
+void DataLoader::loadEvents() 
+{ E = EventsLoader{config("filepaths", "events")}; }
+
+void DataLoader::loadPeople() 
+{ P = PeopleLoader{config("filepaths", "people")}; }
 
 TimePeriod DataLoader::query(const Person& p, const date::sys_days& d) 
 { return query(p,DateTime{d}); }
