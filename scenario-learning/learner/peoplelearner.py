@@ -1,5 +1,12 @@
 from collections import defaultdict
 
+from itertools import groupby
+
+import numpy as np
+
+from sklearn.metrics import pairwise_distances
+from sklearn.cluster import AgglomerativeClustering
+
 from model.Person import Person
 from model.MetaPerson import MetaPerson
 
@@ -60,7 +67,33 @@ class PeopleLearner:
         :param event_diff_ratio: The difference in event attendance
         :param min_group: The minimum group size
         '''
+        if not people: # no people to group
+            return []
+        if len(people) == 1:
+            return [people[0]]
 
+        # The current set of people
+        people_by_id = {p.id : p for p in people}
+
+        def people_dist(pidlist1, pidlist2):
+            '''
+            Determine the distance between people
+            :param pidlist1, pidlist2: pids of people to compare
+            '''
+            p1, p2 = people_by_id[pidlist1[0]], people_by_id[pidlist2[0]]
+            eids_dist = jaccard_index(p1.eids, p2.eids)
+            return eids_dist
+
+        pids = np.array(list(people_by_id)) # all ids
+        pdists = pairwise_distances(pids.reshape(-1,1), metric=people_dist,
+                                    force_all_finite=False)
+        ac = AgglomerativeClustering(distance_threshold=0.3, n_clusters=None,
+                                     affinity='precomputed', linkage='average')
+        ac.fit(pdists)
+        for _,gp in groupby(sorted(zip(ac.labels_,pids)), key=lambda x : x[0]):
+            yield list(map(lambda x : people_by_id[x[1]], gp))
+
+        '''
         # Attempt to group people based on the events they attend
         small = []
         count = 0
@@ -83,4 +116,5 @@ class PeopleLearner:
             # else:
                 # small.extend(group)
         print(f'Number of people removed: {count}', flush=True)
+        '''
 

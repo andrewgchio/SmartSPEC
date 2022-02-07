@@ -1,12 +1,15 @@
 from datetime import datetime, timedelta
 from collections import defaultdict
-from itertools import tee, chain
+from itertools import tee, chain, groupby
 
+import numpy as np
 import pandas as pd
 import math
 import matplotlib.pyplot as plt
 from tqdm import tqdm
 import json
+from sklearn.metrics import pairwise_distances
+from sklearn.cluster import AgglomerativeClustering
 
 import ruptures as rpt
 
@@ -236,6 +239,7 @@ WHERE cnx_time BETWEEN '{date}' AND '{date} 23:59:59.99'""")
         :param wifi_aps: The set of wifi-aps for which we generate events
         :return: metaevents. The list of all metaevents learned. 
         '''
+
         with open(fspaces) as f:
             wifi_aps = [x.strip() for x in f]
         events_by_wifi_aps = self.gen_all_events(wifi_aps)
@@ -248,16 +252,49 @@ WHERE cnx_time BETWEEN '{date}' AND '{date} 23:59:59.99'""")
                 metaevents.append(MetaEvent.parse_from_list(elist))
         return events_by_id, metaevents
 
-    def _group_events(self, events, time_diff_ratio=0.8, occ_diff_ratio=0.2,
+    def _group_events(self, events, time_diff_ratio=0.8, occ_diff_ratio=0.2, 
                         min_group=2):
         '''
         The main logic for grouping events together when generating metaevents. 
         We call two events similar if they occur in the same space, are similar
         in time, and have similar attendees
 
-        :param events: The set of events to group
+        :param events: events to group
         :param time_diff_ratio: The difference in event times. Jaccard Index.
         :param occ_diff_ratio: The difference in attendees. Jaccard index.
+        '''
+        if not events: # no events to group
+            return []
+        if len(events) == 1:
+            return [events[0]]
+
+        # The current events
+        events_by_id = {e.id : e for e in events}
+
+        def event_dist(eidlist1, eidlist2):
+            '''
+            Determine the distance between events.
+            
+            :param eidlist1, eidlist2: eids of events to compare
+            '''
+            e1, e2 = events_by_id[eidlist1[0]], events_by_id[eidlist2[0]]
+            cid_dist = jaccard_index(e1.cids, e2.cids)
+            tp_dist = TPE.diff(e1.tp, e2.tp)
+            #if cid_dist < occ_diff_ratio or tp_dist < time_diff_ratio:
+            #    return float('inf') # do not accept 
+            return 0.5*cid_dist + 0.5*tp_dist
+
+        eids = np.array(list(events_by_id)) # all ids
+        pdists = pairwise_distances(eids.reshape(-1,1), metric=event_dist,
+                                    force_all_finite=False)
+
+        # TODO: restrict matches to be in the same space?
+        ac = AgglomerativeClustering(distance_threshold=0.3, n_clusters=None,
+                                     affinity='precomputed', linkage='average')
+        ac.fit(pdists)
+        for _,gp in groupby(sorted(zip(ac.labels_,eids)), key=lambda x : x[0]):
+            yield list(map(lambda x : events_by_id[x[1]], gp))
+            
         '''
         small = []
         count = 0
@@ -278,8 +315,8 @@ WHERE cnx_time BETWEEN '{date}' AND '{date} 23:59:59.99'""")
                 # count += 1
             # else:
                 # small.extend(grouped)
-        '''
-        # Forcibly group events that are in smaller groups
+
+        # Forcibly group events that are in smaller groups?
         while small:
             group = [small.pop()]
             H = Heap(small, key=lambda x : 
