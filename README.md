@@ -10,6 +10,11 @@ The *SmartSPEC* architecture consists of two main components:
 
 * *Scenario Generation*, which takes *SmartSPEC* data to generate a synthetic dataset from which a smart space dataset (e.g., trajectory dataset, sensor observation dataset, etc.) can be derived. We use the variations of the [data models](#generation-data-models) described below to define various scenarios, which drives the generation of new observable phenomena in the smart space. 
 
+<p align="center">
+    <img src="https://user-images.githubusercontent.com/16398500/150101527-6240d667-7732-4575-b517-e7659e8beee7.jpg" alt="SmartSPEC Architecture">
+</p>
+
+
 ## Requirements<a id="requirements"></a>
 
 The Scenario Learning component of *SmartSPEC* requires the following: 
