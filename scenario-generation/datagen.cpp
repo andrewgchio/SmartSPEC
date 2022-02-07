@@ -1,9 +1,9 @@
-// main.cpp
+// datagen.cpp
 //
-// Main program for the scenario generation component of SmartSPEC
+// Generate synthetic data using the specified entities
 // 
-// Compile: g++ -std=c++17 main.cpp -o main
-// Run    : main <config-file>
+// Compile: g++ -std=c++17 datagen.cpp -o datagen
+// Run    : datagen <config-file>
 
 #include <iostream>
 #include <string>
