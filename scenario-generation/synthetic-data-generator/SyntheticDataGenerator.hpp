@@ -88,7 +88,7 @@ SyntheticDataGenerator::SyntheticDataGenerator(const DataLoader& dl)
       coutlog{teedev}
 {
     coutlog << "Starting to generate synthetic data" << std::endl << std::endl;
-    out << "PersonID,EventID,SpaceID,DateTime" << std::endl;
+    out << "PersonID,EventID,SpaceID,StartDateTime,EndDateTime" << std::endl;
 }
 
 SyntheticDataGenerator::~SyntheticDataGenerator() {
