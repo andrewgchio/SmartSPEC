@@ -25,7 +25,9 @@ if __name__ == '__main__':
 
     print(f'Learn: {config["learners"]["start"]}, {config["learners"]["end"]}')
 
-    if len(sys.argv) > 1 : # file name to data
+    print(sys.argv)
+
+    if len(sys.argv) > 2 : # file name to data
         el = EventsLearner(
                 None, 
                 start=to_date(config['learners']['start']), 
@@ -38,6 +40,11 @@ if __name__ == '__main__':
                 occ_thresh=int(config['learners']['occ-thresh']), 
                 plots=config['filepaths']['plots'],
                 data=config['filepaths']['data'])
+        # Do Event Learning
+        print('Event Learner setup')
+        events_by_id, metaevents = el.gen_metaevents(config['filepaths']['spaces'])
+        print('Event Learning done')
+        
     else:
         with Connection() as conn:
             print('Connection setup')
@@ -53,10 +60,10 @@ if __name__ == '__main__':
                     occ_thresh=int(config['learners']['occ-thresh']),
                     plots=config['filepaths']['plots'])
 
-    # Do Event Learning
-    print('Event Learner setup')
-    events_by_id, metaevents = el.gen_metaevents(config['filepaths']['spaces'])
-    print('Event Learning done')
+            # Do Event Learning
+            print('Event Learner setup')
+            events_by_id, metaevents = el.gen_metaevents(config['filepaths']['spaces'])
+            print('Event Learning done')
 
     print('People Learner setup')
     pl = PeopleLearner()

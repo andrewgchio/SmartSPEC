@@ -94,6 +94,7 @@ class PeopleLearner:
             yield list(map(lambda x : people_by_id[x[1]], gp))
 
         '''
+        # A simple heuristic to consider if Agglomerative Clustering is slow
         # Attempt to group people based on the events they attend
         small = []
         count = 0

@@ -1,4 +1,5 @@
 import mysql.connector as myc
+from getpass import getpass
 
 # A context manager that connects to the MySQL database using the given login 
 # info. Use as a context manager, e.g., 
@@ -12,8 +13,8 @@ class Connection:
         '''
         Credentials for MySQL client, server 
         '''
-        self.user = input('Enter user: ')
-        self.passwd = getpass('Enter pass: ')
+        self.user = input('Enter MySQL user[root]: ') or 'root'
+        self.passwd = getpass('Enter MySQL pass: ')
 
     def _login(self):
         '''

@@ -1,0 +1,17 @@
+[learners]
+start       = 2017-01-01
+end         = 2017-01-08
+unit        = 5
+validity    = 10
+smooth      = EMA
+window      = 10
+time-thresh = 10
+occ-thresh  = 10
+
+[filepaths]
+spaces     = data/demo/Spaces.json
+metaevents = data/demo/MetaEvents.json
+metapeople = data/demo/MetaPeople.json
+people     = data/demo/People.json
+events     = data/demo/Events.json
+plots      = data/demo/plots

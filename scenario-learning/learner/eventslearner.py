@@ -73,7 +73,7 @@ class EventsLearner:
             cursor = self.conn.lcnx.cursor()
 
             cursor.execute(f"""\
-SELECT * FROM wifi_connection 
+SELECT * FROM connectivity 
 WHERE cnx_time BETWEEN '{date}' AND '{date} 23:59:59.99'""")
 
         obs_groups = defaultdict(list)
@@ -295,7 +295,8 @@ WHERE cnx_time BETWEEN '{date}' AND '{date} 23:59:59.99'""")
         for _,gp in groupby(sorted(zip(ac.labels_,eids)), key=lambda x : x[0]):
             yield list(map(lambda x : events_by_id[x[1]], gp))
             
-        '''
+        ''' 
+        # A simple heuristic to consider if Agglomerative Clustering is slow
         small = []
         count = 0
         while events:
