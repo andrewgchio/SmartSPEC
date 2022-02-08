@@ -11,7 +11,7 @@ The *SmartSPEC* architecture consists of two main components:
 * *Scenario Generation*, which takes *SmartSPEC* data to generate a synthetic dataset from which a smart space dataset (e.g., trajectory dataset, sensor observation dataset, etc.) can be derived. We use the variations of the [data models](#generation-data-models) described below to define various scenarios, which drives the generation of new observable phenomena in the smart space. 
 
 <p align="center">
-    <img src="https://user-images.githubusercontent.com/16398500/150101527-6240d667-7732-4575-b517-e7659e8beee7.jpg" alt="SmartSPEC Architecture">
+    <img src="https://user-images.githubusercontent.com/16398500/152928317-698204c2-6e37-44c3-ad1b-75fa8c486f01.png" alt="SmartSPEC Architecture">
 </p>
 
 
@@ -20,15 +20,22 @@ The *SmartSPEC* architecture consists of two main components:
 The Scenario Learning component of *SmartSPEC* requires the following: 
 
 * [Python](https://www.python.org) (version >= 3.6.8)
-* [pandas](https://pandas.pydata.org) (version >= 1.1.0)
 * [numpy](https://numpy.org)(version >= 1.19.2)
-* [scikit-learn](https://scikit-learn.org/stable) (version >= 0.24.2)
-* [ruptures](https://ctruong.perso.math.cnrs.fr/ruptures-docs/build/html/index.html) (for break point detection) (version >= 1.1.5)
+* [pandas](https://pandas.pydata.org) (version >= 1.1.0)
 * [matplotlib](https://matplotlib.org) (version >= 3.2.2)
-* [MySQL Python Connector](https://dev.mysql.com/doc/connector-python/en) (version >= 8.0.13)
+* [scikit-learn](https://scikit-learn.org/stable) (version >= 0.24.2)
 * [python-rapidjson](https://github.com/python-rapidjson/python-rapidjson) (version >= 1.5)
+* [tqdm](https://github.com/tqdm/tqdm) (version >= 4.62.3)
+* [ruptures](https://ctruong.perso.math.cnrs.fr/ruptures-docs/build/html/index.html) (for break point detection) (version >= 1.1.5)
+* [MySQL Python Connector](https://dev.mysql.com/doc/connector-python/en) (version >= 8.0.13)
 
-Note that the majority of these requirements can be fulfilled by installing [Anaconda](https://www.anaconda.com). 
+Note that these requirements can be fulfilled by using an [Anaconda](https://www.anaconda.com) environment. After installing Anaconda, open the Anaconda command line and execute: 
+```
+conda create --name smartspec
+conda activate smartspec
+conda install python-rapidjson numpy pandas matplotlib tqdm scikit-learn 
+pip install ruptures mysql-connector-python
+``` 
 
 A local MySQL database is used as the data source for learning metaevents and metapeople. To set up the local data source: 
 
@@ -55,8 +62,22 @@ CREATE INDEX time_and_ap ON simulation_seed.connectivity (cnx_time, wifi_ap);
 The Scenario Generation component of *SmartSPEC* requires
 
 * C++ (version >= 17)
-* [date](https://github.com/HowardHinnant/date)
-* [rapidjson](https://github.com/Tencent/rapidjson)
+* [boost](https://www.boost.org/) (version >= 1.68.0)
+* [date](https://github.com/HowardHinnant/date) (included in project)
+* [rapidjson](https://github.com/Tencent/rapidjson) (included in project)
+
+## Using SmartSPEC
+
+SmartSPEC provides three modes of operation to generate synthetic data varying in the level of user involvement/automation (see figure below). The steps to use our system are as follows:
+
+* Define the simulated space and its embedded sensors (1).
+* Define MetaPeople and MetaEvents manually (2a) or automatically (2b).
+* Define specific people and events based on the previous metamodels manually (3a) or automatically (3b).
+* Configure the simulation and automatically generate the synthetic dataset (4).
+
+<p align="center">
+    <img src="https://user-images.githubusercontent.com/16398500/152927616-787abd34-42ba-4776-be5d-b44792c12a34.svg" alt="SmartSPEC Workflows")
+</p>
 
 ## Scenario Learning: Configurations and Data Models <a id="learning-data-models"></a>
 
@@ -672,13 +693,20 @@ To run the Scenario Learning Component:
 
 Compile: None
 
-Run: `python main.py` in the `scenario-learning` directory
+Setup: (Recommended) Open the anaconda command prompt and run `conda activate smartspec`
+
+Run: `python main.py <config-file>` in the `scenario-learning` directory
+
 
 To run the Scenario Generation Component:
 
-Compile: `g++ -std=c++17 main.cpp -o main`
+Compile (Entity Generator): `g++ -std=c++17 entitygen.cpp -o entitygen` or `make entityGenCompile`
 
-Run: `main <config-file>` in the `scenario-generation` directory
+Run (Entity Generator): `entitygen <config-file>`
+
+Compile (Synthetic Data Generator): `g++ -std=c++17 datagen.cpp -o datagen` or `make dataGenCompile`
+
+Run (Synthetic Data Generator): `datagen <config-file>`
 
 ## Citations: <a id="citations"></a>
 
@@ -711,4 +739,3 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ```
-
