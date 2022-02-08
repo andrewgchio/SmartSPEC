@@ -1,0 +1,100 @@
+[
+    {
+        "id": 0,
+        "description": "outside",
+        "capacity": -1,
+        "neighbors": [
+            1
+        ],
+        "coordinates": [18,18,1]
+    },
+    {
+        "id": 1,
+        "capacity": 10,
+        "neighbors": [
+            0,
+            2
+        ],
+        "coordinates": [13,16,1]
+    },
+    {
+        "id": 2,
+        "capacity": 10,
+        "neighbors": [
+            1,
+            3
+        ],
+        "coordinates": [16,14,1]
+    },
+    {
+        "id": 3,
+        "capacity": 30,
+        "neighbors": [
+            2,
+            4
+        ],
+        "coordinates": [10,14,1]
+    },
+    {
+        "id": 4,
+        "capacity": 10,
+        "neighbors": [
+            3,
+            5
+        ],
+        "coordinates": [12,12,1]
+    },
+    {
+        "id": 5,
+        "capacity": 10,
+        "neighbors": [
+            4,
+            6
+        ],
+        "coordinates": [16,13,1]
+    },
+    {
+        "id": 6,
+        "capacity": 10,
+        "neighbors": [
+            5,
+            7
+        ],
+        "coordinates": [13,10,1]
+    },
+    {
+        "id": 7,
+        "capacity": 10,
+        "neighbors": [
+            6,
+            8
+        ],
+        "coordinates": [14,10,1]
+    },
+    {
+        "id": 8,
+        "capacity": 15,
+        "neighbors": [
+            7,
+            9
+        ],
+        "coordinates": [13,11,1]
+    },
+    {
+        "id": 9,
+        "capacity": 10,
+        "neighbors": [
+            8,
+            10
+        ],
+        "coordinates": [11,8,1]
+    },
+    {
+        "id": 10,
+        "capacity": 10,
+        "neighbors": [
+            9
+        ],
+        "coordinates": [12,8,1]
+    }
+]
