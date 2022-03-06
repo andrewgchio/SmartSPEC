@@ -1,17 +1,24 @@
-entityGenCompile:
+all:
 	g++ -std=c++17 entitygen.cpp -o entitygen
-
-entityGenRun:
-	entitygen data/demo/config.txt
-
-dataGenCompile:
 	g++ -std=c++17 datagen.cpp -o datagen
 
-dataGenRun:
+entitygen:
+	g++ -std=c++17 entitygen.cpp -o entitygen
+
+runentitygen:
+	entitygen data/demo/config.txt
+
+datagen:
+	g++ -std=c++17 datagen.cpp -o datagen
+
+rundatagen:
 	datagen data/demo/config.txt
 
-view:
+viewdata:
 	vim data/demo/output/data.csv
+
+viewobs:
+	vim data/demo/output/observations.csv
 
 clean:
 	/bin/rm -rf core.* vgcore.* entitygen datagen

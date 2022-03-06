@@ -34,7 +34,6 @@ using SensorID = int;
 
 using MetaPersonID = int;
 using MetaEventID  = int;
-using MetaSpaceID  = int;
 
 using PersonIDIndexMap     = std::map<PersonID, Index>;
 using EventIDIndexMap      = std::map<EventID, Index>;
@@ -50,7 +49,9 @@ using SensorIDList     = std::vector<SensorID>;
 using MetaEventIDList  = std::vector<MetaEventID>;
 using MetaPersonIDList = std::vector<MetaPersonID>;
 
-
+using Mobility            = std::string;
+using Coverage            = SpaceIDList; 
+using Interval            = int;
 using MinCap              = int;
 using MaxCap              = int;
 using MinCapDistr         = Normal<MinCap>;
@@ -65,5 +66,8 @@ using PersonCapRangeDistr = std::map<PersonID, CapRangeDistr>;
 using SrcDest         = std::pair<SpaceID, SpaceID>;
 using SpaceIDSet      = std::set<SpaceID>;
 using SrcDestIndexMap = std::map<SrcDest, Index>;
+
+// Sensors Observations
+using PersonIDSet = std::set<PersonID>;
 
 #endif // DATALOADERS_TYPEDEFS_HPP

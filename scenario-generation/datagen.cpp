@@ -10,6 +10,7 @@
 
 #include "dataloader/DataLoader.hpp"
 #include "synthetic-data-generator/SyntheticDataGenerator.hpp"
+#include "sensor-observation-generator/SensorObservationGenerator.hpp"
 
 int main(int argc, char* argv[]) {
 
@@ -26,6 +27,10 @@ int main(int argc, char* argv[]) {
     // Generate synthetic data logs
     SyntheticDataGenerator sdg{dl};
     sdg.generateLogs();
+
+    // Generate sensor observation data
+    SensorObservationGenerator sog{dl};
+    sog.generateObservations();
 
     return 0;
 }

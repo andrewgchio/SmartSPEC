@@ -8,6 +8,7 @@
 #include "SpacesLoader.hpp"
 #include "EventsLoader.hpp"
 #include "PeopleLoader.hpp"
+#include "SensorsLoader.hpp"
 
 #include "MetaEventsLoader.hpp"
 #include "MetaPeopleLoader.hpp"
@@ -34,7 +35,7 @@ public:
 
     ConfigLoader config;
 
-    // SensorsLoader S;
+    SensorsLoader S;
     PeopleLoader  P;
     EventsLoader  E;
     SpacesLoader  C;
@@ -50,6 +51,7 @@ public:
 DataLoader::DataLoader(const Filename& fname)
     : config{fname}, 
       C{config("filepaths","spaces"), config("filepaths","spaces-cache","")},
+      S{config("filepaths","sensors")},
       MP{config("filepaths","metapeople")},
       ME{config("filepaths","metaevents")},
       MT{config("filepaths","metatrajectories","none"), 
@@ -79,6 +81,7 @@ TimePeriod DataLoader::query(const Event& e, const DateTime& dt)
 
 std::ostream& operator<<(std::ostream& oss, const DataLoader& dl) {
     oss << dl.config
+        << dl.S
         << dl.C
         << dl.P
         << dl.E

@@ -1,14 +1,14 @@
 [people]
-number = 100
+number = 200
 generation = all
 
 [events]
 number = 540
-generation = diff
+generation = none
 
 [synthetic-data-generator]
 start = 2020-01-01
-end   = 2020-04-01
+end   = 2020-02-01
 
 [filepaths]
 metapeople          = data/demo/MetaPeople.json
