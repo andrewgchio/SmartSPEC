@@ -29,13 +29,15 @@ The Scenario Learning component of *SmartSPEC* requires the following:
 * [ruptures](https://ctruong.perso.math.cnrs.fr/ruptures-docs/build/html/index.html) (for break point detection) (version >= 1.1.5)
 * [MySQL Python Connector](https://dev.mysql.com/doc/connector-python/en) (version >= 8.0.13)
 
-Note that these requirements can be fulfilled by using an [Anaconda](https://www.anaconda.com) environment. After installing Anaconda, open the Anaconda command line and execute: 
+Note that most of these requirements can be fulfilled by using an [Anaconda](https://www.anaconda.com) environment. After installing Anaconda, open the Anaconda command line and execute: 
 ```
 conda create --name smartspec
 conda activate smartspec
 conda install python-rapidjson numpy pandas matplotlib tqdm scikit-learn 
 pip install ruptures mysql-connector-python
 ``` 
+
+Note that there may be some secondary dependencies to install; please refer to the installation guides for the appropriate dependency if there are issues. 
 
 A local MySQL database is used as the data source for learning metaevents and metapeople. To set up the local data source: 
 
@@ -50,7 +52,16 @@ CREATE TABLE simulation_seed.connectivity
 );
 ```
 
-* Populate table by importing data.
+* Populate table by importing data. This data should be in the following form:
+```
+wifi_ap,cnx_time,client_id
+1,2017-01-01 07:30:31,81
+9,2017-01-01 10:39:13,72
+8,2017-01-01 10:40:08,72
+...
+```
+
+Please note that you may need to modify the default security settings of MySQL in order to create the MySQL database (e.g., configure database user to authenticate via `mysql_native_password`. 
 
 * Note, the local data queries can be optimized by setting indices as follows: 
 ```sql
@@ -107,7 +118,7 @@ plots      = Path
 
 In the `learners` section, `start` and `end` refer to the start and end dates (expressed as `'YYYY-MM-DD'`) for learning. `unit` denotes the number of minutes to group connection events. `validity` refers to the number of minutes for which the client will stay around the sensor. `smooth` and `window` are used to indicate the type of smoothening function to apply to the occupancy graphs; use `smooth=SMA` to apply a simple moving average and `smooth=EMA` to apply an exponential moving average. The `time-thresh` determines a minimum duration (minutes) required to realize an event. `occ-thresh` determines the minimum number of attendees required to realize an event. 
 
-In `filepaths`, each path denotes a relative path to the appropriate file. `plots` is a directory where plots of learned events will be saved. 
+The relative paths to files used as input / produced as output should be specified in the `filepaths` section. `plots` is a directory where plots of learned events will be saved. 
 
 Example:
 ```
@@ -159,6 +170,7 @@ metaevents          = Path
 people              = Path
 events              = Path
 spaces              = Path
+sensors             = Path
 output              = Path
 generated-files     = Path
 shortest-path-cache = Path
@@ -168,7 +180,7 @@ In the `people` section, `number` refers to the number of people to simulate and
 
 In the `synthetic-data-generator` section, `start` and `end` refer to strings of the form `'YYYY-MM-DD'` that denote the start and end date of the simulation. 
 
-In the `filepaths` section, each path denotes a relative path to the appropriate file. Note that `shortest-path-cache` is a cache file used to store shortest paths between spaces (a default for determining trajectories between spaces).
+The relative paths to files used as input / produced as output should be specified in the `filepaths` section. Note that `shortest-path-cache` is a cache file used to store shortest paths between spaces (a default for determining trajectories between spaces).
 
 Example: 
 ```
@@ -190,6 +202,7 @@ metaevents          = data/demo/MetaEvents.json
 people              = data/demo/People.json
 events              = data/demo/Events.json
 spaces              = data/demo/Spaces.json
+sensors             = data/demo/Sensors.json
 output              = data/demo/output/
 generated-files     = data/demo/
 shortest-path-cache = data/demo/output/shortest-path-cache.csv
@@ -357,7 +370,7 @@ The `description` property is optional and provides a user-friendly name for the
 
 The `mobility` property is a string taking on one of the values `"static"` or `"mobile"`. An in-situ sensor is modeled with `mobility="static"` and a list of covered spaces `coverage=[int]`.
 
-The `interval` property determines the periodic interval for which the sensor produces observations. 
+The `interval` property determines the periodic interval in minutes for which the sensor produces observations. 
 
 Example:
 ```
