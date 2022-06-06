@@ -20,7 +20,7 @@
 
 namespace {
 
-    const date::days day1{1};
+    //const date::days day1{1}; // already defined in Synthetic Data Gen
     const double OBS_PR = 0.8;
 
 } // end namespace
