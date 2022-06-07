@@ -146,6 +146,7 @@ std::ostream& operator<<(std::ostream& oss, const std::tuple<T1,T2,T3>& t) {
         << std::get<1>(t) << ","
         << std::get<2>(t) 
         << ")";
+    return oss;
 }
 
 template<class K, class V>
