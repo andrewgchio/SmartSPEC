@@ -13,7 +13,7 @@
 namespace {
 
 // Pattern to recognize a Section
-const std::regex SEC_PAT{"\\[\\s*(.+?)\\s*\\]"};
+const std::regex SEC_PAT{"\\s*\\[\\s*(.+?)\\s*\\]\\s*"};
 
 // Pattern to recognize a Option (= Value) inside a Section
 const std::regex OPT_PAT{"\\s*(.+?)\\s*=\\s*(.+?)\\s*"};
