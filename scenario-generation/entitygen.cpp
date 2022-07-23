@@ -19,7 +19,7 @@ int main(int argc, char* argv[]) {
     // Print out data if desired
     // std::cout << dl << std::endl;
 
-    // Generate Events and People according to the config file
+    // Generate Events according to the config file
     EntityGenerator::generateEvents(
             dl.ME,
             dl.E, 
@@ -27,6 +27,8 @@ int main(int argc, char* argv[]) {
             dl.config("events","generation"),
             dl.config("filepaths","events")
     );
+
+    // Generate People according to the config file
     EntityGenerator::generatePeople(
             dl.MP,
             dl.P, 
