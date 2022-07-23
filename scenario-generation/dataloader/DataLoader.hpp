@@ -55,7 +55,7 @@ DataLoader::DataLoader(const Filename& fname)
       MP{config("filepaths","metapeople")},
       ME{config("filepaths","metaevents")},
       MT{config("filepaths","metatrajectories","none"), 
-         config("filepaths","shortest-path-cache","none"),
+         config("filepaths","path-cache","none"),
          C},
       start{config("synthetic-data-generator","start")},
       end{config("synthetic-data-generator","end")}
