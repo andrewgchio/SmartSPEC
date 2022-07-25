@@ -13,15 +13,30 @@ public:
     SpaceIDList traj;
     TimeList delta;
 
+    // Queries
     int size() const;
     Time totalTime() const;
+    bool empty() const;
+    SpaceID dest() const;
 
     explicit operator bool() const;
 
+    SpaceID operator[](int i);
+    SpaceID operator[](int i) const;
+
+    // I/O
     friend std::ostream& operator<<(std::ostream& oss, const Trajectory& t);
 
 };
 
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+// Queries
+
+// Return the length of the trajectory
+int Trajectory::size() const { return traj.size(); }
+
+// Return the total time taken for the trajectory
 Time Trajectory::totalTime() const {
     Time total{0};
     for (const Time& t : delta)
@@ -29,10 +44,26 @@ Time Trajectory::totalTime() const {
     return total;
 }
 
+// Return whether the trajectory is empty
+bool Trajectory::empty() const { return traj.empty(); }
 
-int Trajectory::size() const { return traj.size(); }
+// Return the destination space of the trajectory
+SpaceID Trajectory::dest() const { return traj.back(); }
+
+// Return whether the trajectory is null (empty)
 Trajectory::operator bool() const { return delta.empty(); }
 
+// Return the ith space id in the trajectory
+SpaceID Trajectory::operator[](int i) { return traj[i]; }
+
+// Return the ith space id in the trajectory (const)
+SpaceID Trajectory::operator[](int i) const { return traj[i]; }
+
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+// I/O
+
+// Print a trajectory
 std::ostream& operator<<(std::ostream& oss, const Trajectory& t) {
     oss << "<";
     if (!t) {

@@ -19,6 +19,7 @@
 
 namespace {
 
+    // A default stdev used when the `required` attribute is not specified
     const std::string DEF_STDEV = "00:10:00";
 
 } // end namespace
@@ -27,88 +28,123 @@ namespace {
 ////////////////////////////////////////////////////////////////////////////////
 // Period Details (part of TP Pattern)
 
+// The general class containing attributes for period details
 class PD {
 public: 
+    // Constructors
     PD();
     PD(const rj::Value& det, const Date& s, const Date& e);
     
+    // Queries
     const DateList& dates() const;
 
+    // I/O
     std::ostream& print(std::ostream& oss);
 
 protected: 
     
+    // Frequency of repitition
     int rep=1;
+
+    // Start/end date
     Date s, e;
+
+    // Precomputed list of dates
     DateList dl;
 
 };
 
+// Period details for day pattern
 class DayPD : public PD {
 public:
     DayPD(const rj::Value& det, const Date& s, const Date& e);
 };
 
+// Period details for week pattern
 class WeekPD : public PD {
 public:
     WeekPD(const rj::Value& det, const Date& s, const Date& e);
 };
 
+// Period details for month pattern, specifying days of month
 class MonthPD_Day : public PD {
 public:
     MonthPD_Day(const rj::Value& det, const Date& s, const Date& e);
 };
 
+// Period details for month pattern, specifying weeks of month
 class MonthPD_Week : public PD {
 public:
     MonthPD_Week(const rj::Value& det, const Date& s, const Date& e);
 };
 
+// Period details for year pattern, specifying days of year
 class YearPD_Day : public PD {
 public:
     YearPD_Day(const rj::Value& det, const Date& s, const Date& e);
 };
 
+// Period details for year pattern, specifying weeks of year
 class YearPD_Week : public PD {
 public:
     YearPD_Week(const rj::Value& det, const Date& s, const Date& e);
 };
 
+// Period details for year pattern, specifying of months of year, days of month
 class YearPD_MonthDay : public PD {
 public:
     YearPD_MonthDay(const rj::Value& det, const Date& s, const Date& e);
 };
 
+// Period details for year pattern, specifying of months of year, weeks of month
 class YearPD_MonthWeek : public PD {
 public:
     YearPD_MonthWeek(const rj::Value& det, const Date& s, const Date& e);
 };
+
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+// Time Profile Pattern class
 
 class TPPattern {
 public:
 
     enum Period {DAY, WEEK, MONTH, YEAR};
 
+    // Constructors
     TPPattern();
     explicit TPPattern(const rj::Value& pat);
 
+    // Queries
     const DateList& dates() const;
 
+    // I/O
     friend std::ostream& operator<<(std::ostream& oss, const TPPattern& p);
 
 private: 
 
+    // Start/end date
     Date s, e;
+
+    // Period, specifying what values can be specified in the period details
     Period period;
+
+    // Pointer to the period details
     std::shared_ptr<PD> det;
 
 };
 
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+// Time Profile class
+
 class TimeProfile {
 public:
     
+    // Constructor
     explicit TimeProfile(const rj::Value& profileList);
 
+    // Data structure to hold an entry of a time profile
     struct TimeProfileEntry {
         TPPattern pat;
         NormalTime start, end;
@@ -116,12 +152,15 @@ public:
         bool recur;
     };
 
+    // Queries
     TimePeriod query(const DateTime& eta, bool useETA=true);
 
+    // I/O
     friend std::ostream& operator<<(std::ostream& oss, const TimeProfile& tp);
 
 private:
 
+    // A list of time profile entries
     std::vector<TimeProfileEntry> tp;
 
 };
@@ -133,8 +172,10 @@ using TimeProfileList = std::vector<TimeProfile>;
 ////////////////////////////////////////////////////////////////////////////////
 // Implementations for Period Details
 
+// Default Constructor
 PD::PD() {}
 
+// Construct the period detail by reading from the rapidjson value
 PD::PD(const rj::Value& det, const Date& s, const Date& e) 
     : s{s}, e{e} {
     auto it = det.FindMember("repeat-every");
@@ -142,8 +183,10 @@ PD::PD(const rj::Value& det, const Date& s, const Date& e)
         rep = it->value.GetInt();
 }
 
+// Return the list of dates associated with the period details
 const DateList& PD::dates() const { return dl; }
 
+// Print the period details
 std::ostream& PD::print(std::ostream& oss) {
     oss << "[";
     if (!dl.empty()) {
@@ -156,6 +199,7 @@ std::ostream& PD::print(std::ostream& oss) {
     return oss;
 }
 
+// Construct PD for a day
 DayPD::DayPD(const rj::Value& det, const Date& s, const Date& e)
     : PD{det, s, e} {
     date::days dInc{rep};
@@ -163,6 +207,7 @@ DayPD::DayPD(const rj::Value& det, const Date& s, const Date& e)
         dl.push_back(Date{curr});
 }
 
+// Construct PD for a week
 WeekPD::WeekPD(const rj::Value& det, const Date& s, const Date& e)
     : PD{det, s, e} {
     date::days wInc{7 * rep};
@@ -176,6 +221,7 @@ WeekPD::WeekPD(const rj::Value& det, const Date& s, const Date& e)
     }
 }
 
+// Construct PD for a month, specifying days of month
 MonthPD_Day::MonthPD_Day(const rj::Value& det, const Date& s, const Date& e)
     : PD{det, s, e} {
     date::months mInc{rep};
@@ -188,6 +234,7 @@ MonthPD_Day::MonthPD_Day(const rj::Value& det, const Date& s, const Date& e)
     }
 }
 
+// Construct PD for a month, specifying weeks of month
 MonthPD_Week::MonthPD_Week(const rj::Value& det, const Date& s, const Date& e)
     : PD{det, s, e} {
     date::months mInc{rep};
@@ -204,6 +251,7 @@ MonthPD_Week::MonthPD_Week(const rj::Value& det, const Date& s, const Date& e)
     }
 }
 
+// Construct PD for a year, specifying days of year
 YearPD_Day::YearPD_Day(const rj::Value& det, const Date& s, const Date& e)
     : PD{det, s, e} {
     date::years yInc{rep};
@@ -217,6 +265,7 @@ YearPD_Day::YearPD_Day(const rj::Value& det, const Date& s, const Date& e)
     }
 }
 
+// Construct PD for a year, specifying weeks of year
 YearPD_Week::YearPD_Week(const rj::Value& det, const Date& s, const Date& e)
     : PD{det, s, e} {
     date::years yInc{rep};
@@ -235,6 +284,7 @@ YearPD_Week::YearPD_Week(const rj::Value& det, const Date& s, const Date& e)
     }
 }
 
+// Construct PD for a year, specifying months of year, days of month
 YearPD_MonthDay::YearPD_MonthDay(
         const rj::Value& det, 
         const Date& s, 
@@ -252,6 +302,7 @@ YearPD_MonthDay::YearPD_MonthDay(
     }
 }
 
+// Construct PD for a year, specifying months of year, weeks of month
 YearPD_MonthWeek::YearPD_MonthWeek(
         const rj::Value& det, 
         const Date& s, 
@@ -277,8 +328,10 @@ YearPD_MonthWeek::YearPD_MonthWeek(
 ////////////////////////////////////////////////////////////////////////////////
 // TP Pattern  
 
+// Default Construtor
 TPPattern::TPPattern() {}
 
+// Construct the time profile pattern, using the period to differentiate PDs
 TPPattern::TPPattern(const rj::Value& pat) 
     : s{pat["start-date"].GetString()}, e{pat["end-date"].GetString()} {
     const rj::Value& pd = pat["period-details"];
@@ -318,8 +371,10 @@ TPPattern::TPPattern(const rj::Value& pat)
 
 }
 
+// Return the list of dates 
 const DateList& TPPattern::dates() const { return det->dates(); }
 
+// Print the time profile pattern
 std::ostream& operator<<(std::ostream& oss, const TPPattern& p) 
 { return p.det->print(oss); }
 
@@ -328,6 +383,7 @@ std::ostream& operator<<(std::ostream& oss, const TPPattern& p)
 ////////////////////////////////////////////////////////////////////////////////
 // TimeProfile
 
+// Read the profile list from the rapidjson value and construct a time profile
 TimeProfile::TimeProfile(const rj::Value& profileList) {
     tp.reserve(profileList.Size());
     for (const rj::Value& v : profileList.GetArray()) {
@@ -386,6 +442,9 @@ TimeProfile::TimeProfile(const rj::Value& profileList) {
     }
 }
 
+// Query the time profile, returning a time period for the day if active, and
+// null if not. Datetime eta and bool useETA can be used to skew the time 
+// period result to be closer to the eta time. 
 TimePeriod TimeProfile::query(const DateTime& eta, bool useETA) {
     const Date& d = eta.date();
     const Time& t = eta.time();
@@ -413,6 +472,7 @@ TimePeriod TimeProfile::query(const DateTime& eta, bool useETA) {
     return TimePeriod{}; // Nothing found.
 }
 
+// Print the time profile entries
 std::ostream& operator<<(std::ostream& oss, const TimeProfile& tp) {
     oss << "TimeProfile(";
     if (!tp.tp.empty()) {

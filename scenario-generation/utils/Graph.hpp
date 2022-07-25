@@ -20,7 +20,10 @@
 
 namespace {
 
-typedef std::map<SpaceID, int> Dist;
+// A map of the distance to go to a space 
+typedef std::map<SpaceID, double> Dist;
+
+// A map of the previous space to reach a space
 typedef std::map<SpaceID, SpaceID> Prev;
 
 } // end namespace
@@ -28,70 +31,93 @@ typedef std::map<SpaceID, SpaceID> Prev;
 class SpacesGraph {
 public: 
     
+    // Constructors
     SpacesGraph();
     SpacesGraph(SpacesLoader& cl, const Filename& cache);
 
-    void addNode(SpaceID s);
-    void addEdge(SpaceID s, SpaceID t);
-
-    const SpaceIDList& shortestPath(SpaceID s, SpaceID t) const;
-
-    void cacheAllShortestPaths(const Filename& cache);
+    // Queries
     const SpaceIDSet& getV() const;
     const std::map<SpaceID, SpaceIDSet>& getE() const;
+    const SpaceIDList& shortestPath(SpaceID s, SpaceID t) const;
 
+    // Modifiers
+    void addNode(SpaceID s);
+    void addEdge(SpaceID s, SpaceID t);
+    void cacheAllShortestPaths();
+
+    // I/O
     friend std::ostream& operator<<(std::ostream& oss, const SpacesGraph& g);
 
 private:
 
+    // Private helper methods
     void cacheShortestPath(SpaceID s);
     std::pair<Dist, Prev> dijkstra(SpaceID s) const;
     std::pair<Dist, Prev> bfs(SpaceID s) const;
-    bool loadSpacesCache(const std::string& cachefile);
-    void writeSpacesCache(const std::string& cachefile);
+    bool loadSpacesCache();
+    void writeSpacesCache();
     
+    // A map of shortest path between a src/dest
     std::map<SrcDest, SpaceIDList> paths;
+
+    // The set of vertices (space ids)
     SpaceIDSet V;
+
+    // The set of edges (edge list)
     std::map<SpaceID, SpaceIDSet> E;
+
+    // Represents whether the paths are cached between src/dest
     bool cache;
+
+    // Name of the paths-cache file
+    Filename fcache;
+
+    // SpacesLoader, to read coordinates
+    SpacesLoader cl;
 
 };
 
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+// Constructors
+
+// Default Constructor; initialize V with the outside space id
 SpacesGraph::SpacesGraph() 
 : cache{true} {
     V.insert(0); // outside SpaceID
 }
 
+// Construct the spaces graph from the given spaces, and cache it
 SpacesGraph::SpacesGraph(SpacesLoader& cl, const Filename& cache) 
-: cache{true} {
+: cache{true}, fcache{cache}, cl{cl} {
     V.insert(0); // outside SpaceID
     for (const Space& c : cl) {
         addNode(c.id);
         for (SpaceID n : c.neighbors)
             addEdge(c.id, n);
     }
-    cacheAllShortestPaths(cache);
+    cacheAllShortestPaths();
 }
 
-void SpacesGraph::addNode(SpaceID s) {
-    cache = false;
-    V.insert(s);
-}
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+// Queries
 
-void SpacesGraph::addEdge(SpaceID s, SpaceID t) {
-    cache = false;
-    V.insert(s);
-    V.insert(t);
-    E[s].insert(t);
-}
+// Return the set of vertices 
+const SpaceIDSet& SpacesGraph::getV() const { return V; }
 
+// Return the set of edges
+const std::map<SpaceID, SpaceIDSet>& SpacesGraph::getE() const { return E; }
+
+// Return the shortest path between a src/dest.
 const SpaceIDList& SpacesGraph::shortestPath(SpaceID s, SpaceID t) const {
+    // Shortest paths must be cached first
     if (!cache) {
-        std::cerr << "SpacesGraph Error: call cacheAllShortestPaths() first" 
-                << std::endl;
+        std::cerr << "SpacesGraph Error: cache paths first" << std::endl;
         std::exit(1);
     }
     
+    // Try to find a path between the src/dest
     auto path = paths.find(std::make_pair(s,t));
     if (path == paths.end()) {
         std::cerr << "SpacesGraph Error: no path found between " 
@@ -99,22 +125,44 @@ const SpaceIDList& SpacesGraph::shortestPath(SpaceID s, SpaceID t) const {
         std::exit(1);
     }
 
+    // Return cached path
     return path->second;
 }
 
-void SpacesGraph::cacheAllShortestPaths(const std::string& cachefile) {
-    if (!loadSpacesCache(cachefile)) {
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+// Modifiers
+
+// Add a node to the space graph
+void SpacesGraph::addNode(SpaceID s) {
+    cache = false;
+    V.insert(s);
+}
+
+// Add an edge to the space graph
+void SpacesGraph::addEdge(SpaceID s, SpaceID t) {
+    cache = false;
+    V.insert(s);
+    V.insert(t);
+    E[s].insert(t);
+}
+
+// Cache all shortest paths into the file
+void SpacesGraph::cacheAllShortestPaths() {
+    if (!loadSpacesCache()) {
         for (SpaceID s : V) {
             cacheShortestPath(s);
         }
     }
     cache = true;
-    writeSpacesCache(cachefile);
+    writeSpacesCache();
 }
 
-const SpaceIDSet& SpacesGraph::getV() const { return V; }
-const std::map<SpaceID, SpaceIDSet>& SpacesGraph::getE() const { return E; }
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+// I/O
 
+// Print the space graph and corresponding shortest paths
 std::ostream& operator<<(std::ostream& oss, const SpacesGraph& g) {
     oss << "Graph(" << std::endl;
     for (SpaceID s : g.V)
@@ -129,8 +177,9 @@ std::ostream& operator<<(std::ostream& oss, const SpacesGraph& g) {
 ////////////////////////////////////////////////////////////////////////////////
 // Private Helpers
 
+// Use Dijkstra's algorithm to find the shortest paths between nodes
 void SpacesGraph::cacheShortestPath(SpaceID s) {
-    std::pair<Dist, Prev> DP = bfs(s);
+    std::pair<Dist, Prev> DP = dijkstra(s);
     for (SpaceID t : V) {
         SrcDest sd(s,t);
         SpaceIDList path;
@@ -154,6 +203,7 @@ void SpacesGraph::cacheShortestPath(SpaceID s) {
     }
 }
 
+// Dijkstra's algorithm
 std::pair<Dist, Prev> SpacesGraph::dijkstra(SpaceID s) const {
     Dist D;
     Prev P;
@@ -169,8 +219,9 @@ std::pair<Dist, Prev> SpacesGraph::dijkstra(SpaceID s) const {
         if (it == E.end())
             continue;
         for (SpaceID v : it->second) {
-            if (D[u] + 1 < D[v]) {
-                D[v] = D[u] + 1;
+            double edgedist = cl.dist(u,v);
+            if (D[u] + edgedist < D[v]) {
+                D[v] = D[u] + edgedist;
                 P[v] = u;
             }
         }
@@ -178,6 +229,7 @@ std::pair<Dist, Prev> SpacesGraph::dijkstra(SpaceID s) const {
     return std::make_pair(D,P);
 }
 
+// Breadth first search
 std::pair<Dist, Prev> SpacesGraph::bfs(SpaceID s) const {
     // Mark all vertices as not visited
     Prev P;
@@ -209,12 +261,13 @@ std::pair<Dist, Prev> SpacesGraph::bfs(SpaceID s) const {
     return std::make_pair(D,P);
 }
 
-bool SpacesGraph::loadSpacesCache(const std::string& cachefile) {
-    if (!checkFileExists(cachefile))
+// Read the fcache file and load in the cached paths
+bool SpacesGraph::loadSpacesCache() {
+    if (!checkFileExists(fcache))
         return false;
     std::cout << "reading cache file" << std::endl;
     std::string src,dest,path;
-    for (std::ifstream file{cachefile}; std::getline(file, src, ',');) {
+    for (std::ifstream file{fcache}; std::getline(file, src, ',');) {
         std::getline(file, dest, ',');
         SrcDest sd{std::stoi(src), std::stoi(dest)};
 
@@ -232,10 +285,11 @@ bool SpacesGraph::loadSpacesCache(const std::string& cachefile) {
     return true;
 }
 
-void SpacesGraph::writeSpacesCache(const std::string& cachefile) {
-    if (cachefile == "")
+// Save the computed paths into fcache
+void SpacesGraph::writeSpacesCache() {
+    if (fcache == "")
         return;
-    std::ofstream file(cachefile);
+    std::ofstream file(fcache);
     for (const std::pair<SrcDest, SpaceIDList>& e : paths) {
         file << e.first.first << "," << e.first.second << ",";
 

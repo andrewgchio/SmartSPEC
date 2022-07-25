@@ -15,6 +15,7 @@
 
 namespace {
 
+    // The maximum capacity of a metaevent
     const int MAX_METAEVENT_CAPACITY = 99999;
 
 } // end namespace
@@ -22,58 +23,84 @@ namespace {
 class MetaEventsLoader {
 public:
 
+    // Constructors
     MetaEventsLoader();
     explicit MetaEventsLoader(const Filename& fname);
 
+    // Queries
     int size() const;
     const MetaEventIDList& getIDs() const;
     const ProbabilityList& getPrs() const;
 
-    void addOutMetaEvent();
-    void addLeisureMetaEvent();
-
-    void add(const MetaEvent& me);
-
     MetaEvent& operator[](MetaEventID id);
     const MetaEvent& operator[](MetaEventID id) const;
 
+    // Iterators
+    std::vector<MetaEvent>::iterator begin();
+    std::vector<MetaEvent>::iterator end();
+
+    // Modifiers
+    void add(const MetaEvent& me);
+    void addOutMetaEvent();
+    void addLeisureMetaEvent();
+
+    // I/O
     friend std::ostream& operator<<(std::ostream& oss,
                                     const MetaEventsLoader& mel);
 
-    // Iterators
-    std::vector<MetaEvent>::iterator begin() { return entries.begin(); }
-    std::vector<MetaEvent>::iterator end()   { return entries.end(); }
-
 private:
 
+    // A map of the metaevent id to the index in the list `entries`
     MetaEventIDIndexMap loc;
+
+    // A list of metaevents
     std::vector<MetaEvent> entries;
 
+    // A list of metaevent ids
     MetaEventIDList ids;
+
+    // A list of metaevent probabilities 
     ProbabilityList prs;
 
 };
 
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+// Constructors
+
+// Default Constructor
 MetaEventsLoader::MetaEventsLoader() {}
 
+// For the given metaevents file, read and load each metaevent
 MetaEventsLoader::MetaEventsLoader(const Filename& fname) {
     std::cout << "... Reading MetaEvents file: " << fname << std::endl;
 
+    // JSON reader setup
     rj::Document doc;
     openJSON(fname, doc);
     entries.reserve(doc.Size());
 
     for (const rj::Value& v : doc.GetArray()) {
+    
+        // Initialize a metaevent
         MetaEvent me;
+
+        // id
         me.id = parseInt(v, "id");
+
+        // description
         me.desc = parseStr(v, "description", "");
+
+        // probability
         me.pr = parseDouble(v, "probability", 1.0);
 
+        // spaces: ids and number
         me.selector = SpaceSelector{
                 v["spaces"]["space-ids"],
                 parseInt(v["spaces"], "number", 1)
         };
 
+        // time-profiles
         me.tps.reserve(v["time-profiles"].Size());
         me.tpsPrs.reserve(v["time-profiles"].Size());
         for (const rj::Value& x : v["time-profiles"].GetArray()) {
@@ -81,48 +108,87 @@ MetaEventsLoader::MetaEventsLoader(const Filename& fname) {
             me.tpsPrs.push_back(parseDouble(x, "probability", 1.0));
         }
 
-        // Leisure Event
+        // capacity
         if (v["capacity"].IsString() && parseStr(v, "capacity") == "inf") {
+            // metaevents with infinite capacity
             me.cap[-1] = std::make_pair(
                     Normal<int>{0,0},
                     Normal<int>{MAX_METAEVENT_CAPACITY,0}
             );
         }
-        // Other events
         else if (v["capacity"].IsArray()) {
+            // read each metaperson capacity range for metaevent
             for (const rj::Value& x : v["capacity"].GetArray()) {
                 MetaPersonID mid = parseInt(x, "metaperson-id");
-                if (x.HasMember("lo") && x.HasMember("hi")) {
-                    const rj::Value &lo = x["lo"], &hi = x["hi"];
-                    me.cap[mid] = std::make_pair(
-                            Normal<int>{lo[0].GetDouble(), lo[1].GetDouble()},
-                            Normal<int>{hi[0].GetDouble(), hi[1].GetDouble()}
-                    );
-                }
-                else {
-                    me.cap[mid] = std::make_pair(
-                            Normal<int>{parseDouble(x,"lo-mean"),
-                                        parseDouble(x,"lo-stdev")},
-                            Normal<int>{parseDouble(x,"hi-mean"),
-                                        parseDouble(x,"hi-stdev")}
-                    );
-                }
+                const rj::Value &lo = x["lo"], &hi = x["hi"];
+                me.cap[mid] = std::make_pair(
+                        Normal<int>{lo[0].GetDouble(), lo[1].GetDouble()},
+                        Normal<int>{hi[0].GetDouble(), hi[1].GetDouble()}
+                );
             }
         }
+
+        // Add the metaevent to the data loader
         add(me);
     }
 
-    // Will be added if does not exist
+    // Add a default out metaevent if one was not specified
     addOutMetaEvent();
+
+    // Add a default leisure event if one was not specified
     addLeisureMetaEvent();
+
 }
 
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+// Queries
+
+// Return the number of metaevents
 int MetaEventsLoader::size() const { return entries.size(); }
 
+// Return a list of all metaevent ids
 const MetaEventIDList& MetaEventsLoader::getIDs() const { return ids; }
 
+// Return a list of all metaevent probabilities
 const ProbabilityList& MetaEventsLoader::getPrs() const { return prs; }
 
+// Return a reference to the metaevent with the given id
+MetaEvent& MetaEventsLoader::operator[](MetaEventID id) 
+{ return entries[loc[id]]; }
+
+// Return a reference to the metaevent with the given id (const)
+const MetaEvent& MetaEventsLoader::operator[](MetaEventID id) const 
+{ return entries[loc.at(id)]; }
+
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+// Iterators
+
+// Iterator start
+std::vector<MetaEvent>::iterator MetaEventsLoader::begin() 
+{ return entries.begin(); }
+
+// Iterator end
+std::vector<MetaEvent>::iterator MetaEventsLoader::end() 
+{ return entries.end(); }
+
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+// Modifiers
+
+// Add a metaevent to the data loader
+void MetaEventsLoader::add(const MetaEvent& me) {
+    ids.push_back(me.id);
+    prs.push_back(me.pr);
+    loc[me.id] = entries.size();
+    entries.push_back(me);
+}
+
+
+// Add the out-of-simulation metaevent to the data loader if it does not exist.
+// The corresponding out-of-simulation event will be added when the event 
+// constructor is called
 void MetaEventsLoader::addOutMetaEvent() { 
     MetaEventIDList::const_iterator it = std::find(ids.begin(), ids.end(), -1); 
     if (it == ids.end()) {
@@ -135,6 +201,9 @@ void MetaEventsLoader::addOutMetaEvent() {
     }
 }
 
+// Add the leisure metaevent to the data loader if it does not exist.
+// The corresponding leisure event will be added when the event constructor is
+// called.
 void MetaEventsLoader::addLeisureMetaEvent() {
     MetaEventIDList::const_iterator it = std::find(ids.begin(), ids.end(), 0); 
     if (it == ids.end()) {
@@ -147,21 +216,11 @@ void MetaEventsLoader::addLeisureMetaEvent() {
     }
 }
 
-void MetaEventsLoader::add(const MetaEvent& me) {
-    ids.push_back(me.id);
-    prs.push_back(me.pr);
-    loc[me.id] = entries.size();
-    entries.push_back(me);
-}
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+// I/O
 
-MetaEvent& MetaEventsLoader::operator[](MetaEventID id) {
-    return entries[loc[id]];
-}
-
-const MetaEvent& MetaEventsLoader::operator[](MetaEventID id) const {
-    return entries[loc.at(id)];
-}
-
+// Print all metaevents
 std::ostream& operator<<(std::ostream& oss, const MetaEventsLoader& mel) {
     oss << "MetaEvents:" << std::endl;
     for (const MetaEvent& me : mel.entries)

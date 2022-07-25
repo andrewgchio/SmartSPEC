@@ -18,9 +18,15 @@ public:
     ProbabilityList tpsPrs;
     EventAffinity aff;
 
+    // I/O
     friend std::ostream& operator<<(std::ostream& oss, const MetaPerson& mp);
 };
 
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+// I/O
+
+// Print a metaperson
 std::ostream& operator<<(std::ostream& oss, const MetaPerson& mp) {
     oss << "MetaPerson("
         << "id=" << mp.id << ", "

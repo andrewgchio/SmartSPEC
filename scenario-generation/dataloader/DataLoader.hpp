@@ -20,19 +20,23 @@
 class DataLoader {
 public:
 
+    // Constructor
     explicit DataLoader(const Filename& fname);
 
+    // From entity generation
     void loadEvents();
     void loadPeople();
 
-    // Query functions
+    // Queries for time periods
     TimePeriod query(const Person& p, const date::sys_days& d);
     TimePeriod query(const Person& p, const DateTime& dt);
     TimePeriod query(const Event& e, const date::sys_days& d);
     TimePeriod query(const Event& e, const DateTime& dt);
 
+    // I/O
     friend std::ostream& operator<<(std::ostream& oss, const DataLoader& dm);
 
+    // Data loaders
     ConfigLoader config;
 
     SensorsLoader S;
@@ -48,6 +52,12 @@ public:
 
 };
 
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+// Construtor
+
+// For the given config file, initialize all other data loaders except for 
+// events and people (use loadEvents(), loadPeople() instead)
 DataLoader::DataLoader(const Filename& fname)
     : config{fname}, 
       C{config("filepaths","spaces"), config("filepaths","spaces-cache","")},
@@ -61,24 +71,43 @@ DataLoader::DataLoader(const Filename& fname)
       end{config("synthetic-data-generator","end")}
 {}
 
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+// Load data from entity generation
+
+// Load events from the events file, after entity generation
 void DataLoader::loadEvents() 
 { E = EventsLoader{config("filepaths", "events")}; }
 
+// Load people from the events file, after entity generation
 void DataLoader::loadPeople() 
 { P = PeopleLoader{config("filepaths", "people")}; }
 
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+// Queries for time periods
+
+// Return the time period that a person is in the simulated space on day d
 TimePeriod DataLoader::query(const Person& p, const date::sys_days& d) 
 { return query(p,DateTime{d}); }
 
+// Return the time period that a person is in the simulated space on datetime d
 TimePeriod DataLoader::query(const Person& p, const DateTime& dt) 
 { return MP[p.mid].tps[p.tp].query(dt, false); }
 
+// Return the time period that an event occurs 
 TimePeriod DataLoader::query(const Event& e, const date::sys_days& d) 
 { return query(e,DateTime{d}); }
 
+// Return the time period that an event occurs 
 TimePeriod DataLoader::query(const Event& e, const DateTime& dt) 
 { return ME[e.mid].tps[e.tp].query(dt, true); }
 
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+// I/O
+
+// Print each of the contents of the dataloaders
 std::ostream& operator<<(std::ostream& oss, const DataLoader& dl) {
     oss << dl.config
         << dl.S

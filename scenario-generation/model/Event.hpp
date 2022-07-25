@@ -21,18 +21,29 @@ public:
     SpaceIDList spaces;
     PersonCapRange cap;
 
-    // Synthetic Data Generation
-    std::map<MetaPersonID, CapRange> enrolled;
-
+    // Queries
     bool canAttend(MetaPersonID mid);
+
+    // Modifiers
     void enrollMetaPerson(MetaPersonID mid);
 
+    // I/O
     rj::Value dump(rj::Document::AllocatorType& alloc) const;
 
     friend std::ostream& operator<<(std::ostream& oss, const Event& e);
 
+private:
+    
+    // Synthetic Data Generation
+    std::map<MetaPersonID, CapRange> enrolled;
+
 };
 
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+// Queries
+
+// Returns whether there is enough capacity for the given metaperson to attend
 bool Event::canAttend(MetaPersonID mid) {
     std::map<MetaPersonID, CapRange>::const_iterator eit = enrolled.find(mid);
     PersonCapRange::const_iterator rit = cap.find(mid);
@@ -42,10 +53,18 @@ bool Event::canAttend(MetaPersonID mid) {
     return eit->second.second <= rit->second.second;
 }
 
-void Event::enrollMetaPerson(MetaPersonID mid) {
-    enrolled[mid].second += 1;
-}
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+// Modifiers
 
+// Records that a given metaperson attends this event
+void Event::enrollMetaPerson(MetaPersonID mid) { enrolled[mid].second += 1; }
+
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+// I/O
+
+// Save the event in the given allocator
 rj::Value Event::dump(rj::Document::AllocatorType& alloc) const {
     rj::Value v;
     v.SetObject();
@@ -81,6 +100,7 @@ rj::Value Event::dump(rj::Document::AllocatorType& alloc) const {
     return v;
 }
 
+// Print an event
 std::ostream& operator<<(std::ostream& oss, const Event& e) {
     oss << "Event("
         << "id=" << e.id << ", "

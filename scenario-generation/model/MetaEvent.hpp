@@ -20,9 +20,15 @@ public:
     ProbabilityList tpsPrs;
     PersonCapRangeDistr cap;
 
+    // I/O
     friend std::ostream& operator<<(std::ostream& oss, const MetaEvent& me);
 };
 
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+// I/O
+
+// Print a metaevent
 std::ostream& operator<<(std::ostream& oss, const MetaEvent& me) {
     oss << "MetaEvent("
         << "id=" << me.id << ", "

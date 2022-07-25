@@ -21,6 +21,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 // File IO
 
+// Return true if the filename exists
 bool checkFileExists(const Filename& fname) {
     struct stat buf;
     return stat(fname.c_str(), &buf) == 0;
@@ -31,6 +32,7 @@ bool checkFileExists(const Filename& fname) {
 // JSON IO Utils
 namespace {
 
+// Buffer size
 const int BUF = 65536;
 
 } // end namespace
@@ -38,6 +40,7 @@ const int BUF = 65536;
 // For convenience 
 namespace rj = rapidjson;
 
+// Opens a JSON file and parses it into the document stream
 void openJSON(const Filename& fname, rj::Document& d) {
     FILE* fp = fopen(fname.c_str(), "rb");
     if (fp == NULL) {
@@ -51,6 +54,7 @@ void openJSON(const Filename& fname, rj::Document& d) {
     fclose(fp);
 }
 
+// Dumps the JSON file in the document stream into the file 
 void dumpJSON(const Filename& fname, rj::Document& d) {
     FILE* fp = fopen(fname.c_str(), "wb");
     if (fp == NULL) {
@@ -65,6 +69,7 @@ void dumpJSON(const Filename& fname, rj::Document& d) {
     fclose(fp);
 }
 
+// Parses an int from the rapidjson value
 int parseInt(const rj::Value& v, const char* m) {
     if (v.HasMember(m))
         return v[m].GetInt();
@@ -73,10 +78,11 @@ int parseInt(const rj::Value& v, const char* m) {
     std::exit(1);
 }
 
-int parseInt(const rj::Value& v, const char* m, int o) {
-    return v.HasMember(m) ? v[m].GetInt() : o;
-}
+// Parses an int from the rapidjson value, or returns the default option
+int parseInt(const rj::Value& v, const char* m, int o) 
+{ return v.HasMember(m) ? v[m].GetInt() : o; }
 
+// Parses a double from the rapidjson value
 double parseDouble(const rj::Value& v, const char* m) {
     if (v.HasMember(m))
         return v[m].GetDouble();
@@ -85,10 +91,11 @@ double parseDouble(const rj::Value& v, const char* m) {
     std::exit(1);
 }
 
-double parseDouble(const rj::Value& v, const char* m, double o) {
-    return v.HasMember(m) ? v[m].GetDouble() : o;
-}
+// Parses a double from the rapidjson value, or returns the default option
+double parseDouble(const rj::Value& v, const char* m, double o) 
+{ return v.HasMember(m) ? v[m].GetDouble() : o; }
 
+// Parses a string from the rapidjson value
 std::string parseStr(const rj::Value& v, const char* m) {
     if (v.HasMember(m))
         return v[m].GetString();
@@ -97,10 +104,11 @@ std::string parseStr(const rj::Value& v, const char* m) {
     std::exit(1);
 }
 
-std::string parseStr(const rj::Value& v, const char* m, const std::string& o) {
-    return v.HasMember(m) ? v[m].GetString() : o;
-}
+// Parses a string from the rapidjson value, or returns the default option
+std::string parseStr(const rj::Value& v, const char* m, const std::string& o) 
+{ return v.HasMember(m) ? v[m].GetString() : o; }
 
+// Parses an int array from the rapidjson value
 std::vector<int> parseIntArr(const rj::Value& v, const char* m) {
     if (v.HasMember(m)) {
         std::vector<int> arr;
@@ -120,6 +128,7 @@ std::vector<int> parseIntArr(const rj::Value& v, const char* m) {
 ////////////////////////////////////////////////////////////////////////////////
 // operator<< for various types
 
+// Pretty print a vector
 template<class T>
 std::ostream& operator<<(std::ostream& oss, const std::vector<T>& vec) {
     oss << "[";
@@ -133,12 +142,14 @@ std::ostream& operator<<(std::ostream& oss, const std::vector<T>& vec) {
     return oss;
 }
 
+// Pretty print a pair
 template<class T1, class T2>
 std::ostream& operator<<(std::ostream& oss, const std::pair<T1, T2>& p) {
     oss << "(" << p.first << ", " << p.second << ")";
     return oss;
 }
 
+// Pretty print a tuple
 template<class T1, class T2, class T3>
 std::ostream& operator<<(std::ostream& oss, const std::tuple<T1,T2,T3>& t) {
     oss << "(" 
@@ -149,6 +160,7 @@ std::ostream& operator<<(std::ostream& oss, const std::tuple<T1,T2,T3>& t) {
     return oss;
 }
 
+// Pretty print a map
 template<class K, class V>
 std::ostream& operator<<(std::ostream& oss, const std::map<K,V>& m) {
     oss << "{";

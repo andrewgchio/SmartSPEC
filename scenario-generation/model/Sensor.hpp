@@ -16,10 +16,15 @@ public:
     Coverage cov;
     Interval intr;
 
+    // I/O
     friend std::ostream& operator<<(std::ostream& oss, const Sensor& s);
-
 };
 
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+// I/O
+
+// Print a sensor
 std::ostream& operator<<(std::ostream& oss, const Sensor& s) {
     oss << "Sensor("
         << "id=" << s.id << ", "

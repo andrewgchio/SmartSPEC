@@ -15,11 +15,17 @@ public:
     SrcDest sd;
     std::vector<Trajectory> trajs;
 
+    // I/O
     friend std::ostream& operator<<(std::ostream& oss, 
                                     const MetaTrajectory& mt);
 
 };
 
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+// I/O
+
+// Print a metatrajectory
 std::ostream& operator<<(std::ostream& oss, const MetaTrajectory& mt) {
     oss << "MetaTrajectory("
         << "src/dest=" << mt.sd << ", "

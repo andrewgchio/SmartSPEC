@@ -20,27 +20,35 @@ public:
     MaxCap cap;
     SpaceIDList neighbors;
 
-    // Synthetic Data Generation
-    boost::icl::interval_map<long, int> occ;
-
-    void insertOccupancy(const DateTime& s, const DateTime& e);
+    // Queries
     int getOccupancy(const DateTime& dt) const;
     DateTime getNextOpenTime(const DateTime& dt) const;
 
+    // Modifiers
+    void insertOccupancy(const DateTime& s, const DateTime& e);
+
+    // I/O
     friend std::ostream& operator<<(std::ostream& oss, const Space& c);
+
+private:
+
+    // Synthetic Data Generation
+    boost::icl::interval_map<long, int> occ;
+    
 };
 
-void Space::insertOccupancy(const DateTime& s, const DateTime& e) {
-    occ.add(std::make_pair(
-            boost::icl::interval<long>::right_open(s.count(), e.count()),
-            1));
-}
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+// Queries
 
+// Return the occupancy of the space at the given datetime
 int Space::getOccupancy(const DateTime& dt) const {
     auto it = occ.find(dt.count());
     return it != occ.end() ? it->second : 0;
 }
 
+// Returns the next time that the space is open, or the default datetime if 
+// no such time exists on the day
 DateTime Space::getNextOpenTime(const DateTime& dt) const {
     DateTime next{dt};
     const DateTime& last = dt.lastTime();
@@ -52,6 +60,22 @@ DateTime Space::getNextOpenTime(const DateTime& dt) const {
     return DateTime{};
 }
 
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+// Modifiers
+
+// Record that a person will occupy a space between the given datetimes
+void Space::insertOccupancy(const DateTime& s, const DateTime& e) {
+    occ.add(std::make_pair(
+            boost::icl::interval<long>::right_open(s.count(), e.count()),
+            1));
+}
+
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+// I/O
+
+// Print a space
 std::ostream& operator<<(std::ostream& oss, const Space& c) {
     oss << "Space("
         << "id=" << c.id << ", "
