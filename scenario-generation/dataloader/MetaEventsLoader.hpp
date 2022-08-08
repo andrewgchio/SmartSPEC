@@ -32,6 +32,9 @@ public:
     const MetaEventIDList& getIDs() const;
     const ProbabilityList& getPrs() const;
 
+    MetaEventID getOutMetaEventID() const;
+    MetaEventID getLeisureMetaEventID() const;
+
     MetaEvent& operator[](MetaEventID id);
     const MetaEvent& operator[](MetaEventID id) const;
 
@@ -70,7 +73,6 @@ private:
 
 // Default Constructor
 MetaEventsLoader::MetaEventsLoader() {}
-
 // For the given metaevents file, read and load each metaevent
 MetaEventsLoader::MetaEventsLoader(const Filename& fname) {
     std::cout << "... Reading MetaEvents file: " << fname << std::endl;
@@ -153,6 +155,12 @@ const MetaEventIDList& MetaEventsLoader::getIDs() const { return ids; }
 // Return a list of all metaevent probabilities
 const ProbabilityList& MetaEventsLoader::getPrs() const { return prs; }
 
+// Return the out-of-simulation metaevent id
+MetaEventID MetaEventsLoader::getOutMetaEventID() const { return -1; }
+
+// Return the leisure metaevent id
+MetaEventID MetaEventsLoader::getLeisureMetaEventID() const { return 0; }
+
 // Return a reference to the metaevent with the given id
 MetaEvent& MetaEventsLoader::operator[](MetaEventID id) 
 { return entries[loc[id]]; }
@@ -193,7 +201,7 @@ void MetaEventsLoader::addOutMetaEvent() {
     MetaEventIDList::const_iterator it = std::find(ids.begin(), ids.end(), -1); 
     if (it == ids.end()) {
         MetaEvent me;
-        me.id = -1;
+        me.id = getOutMetaEventID();
         me.desc = "out-of-simulation (added)";
         me.pr = 1.0;
         me.selector = SpaceSelector{SpaceIDList{0}};
@@ -208,7 +216,7 @@ void MetaEventsLoader::addLeisureMetaEvent() {
     MetaEventIDList::const_iterator it = std::find(ids.begin(), ids.end(), 0); 
     if (it == ids.end()) {
         MetaEvent me;
-        me.id = 0;
+        me.id = getLeisureMetaEventID();
         me.desc = "leisure (added)";
         me.pr = 1.0;
         me.selector = SpaceSelector{SpaceIDList{0}};

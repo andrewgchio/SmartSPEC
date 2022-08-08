@@ -2,6 +2,8 @@
 #define MODEL_PERSON_HPP
 
 #include <iostream>
+#include <map>
+#include <set>
 
 #include "../include/rapidjson/document.h"
 
@@ -30,11 +32,13 @@ public:
 
     friend std::ostream& operator<<(std::ostream& oss, const Person& p);
 
-private:
-
     // Synthetic Data Generation
     SpaceID currSpace;
     std::set<EventLogistics> attended;
+
+    // Constraints
+    std::set<EventID> attendedEventIDs;
+    std::map<MetaEventID, int> attendedMetaEventIDs;
 
 };
 
@@ -45,6 +49,7 @@ private:
 // Return the current space that the person is in 
 SpaceID Person::getCurrentSpace() const { return currSpace; }
 
+// Return the set of attended events
 const std::set<EventLogistics>& Person::getAttendedEvents() const 
 { return attended; }
 
@@ -56,7 +61,12 @@ const std::set<EventLogistics>& Person::getAttendedEvents() const
 void Person::setCurrentSpace(SpaceID cid) { currSpace = cid; }
 
 // Adds the given attended event to this person's list of attended events
-void Person::addAttendedEvent(EventLogistics el) { attended.insert(el); }
+void Person::addAttendedEvent(EventLogistics el) { 
+    attended.insert(el); 
+    attendedEventIDs.insert(el.eid);
+    std::cout << "Person::addAttendedEvent try adding 1 to map" << std::endl;
+    attendedMetaEventIDs[el.meid] += 1;
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////

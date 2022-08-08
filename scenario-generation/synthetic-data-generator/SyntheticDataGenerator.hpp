@@ -225,6 +225,7 @@ EventLogistics SyntheticDataGenerator::searchNewEvents(
     // Otherwise, the leisure event will be chosen.
     EventLogistics leisure;
     leisure.eid  = dl.E.getLeisureEventID();
+    leisure.meid = dl.ME.getLeisureMetaEventID();
     leisure.sid  = dl.C.getOutsideSpaceID();
     leisure.traj = dl.MT.getPath(p.getCurrentSpace(), leisure.sid);
     leisure.tp   = TimePeriod{currDT, DateTime{currDT+leisureTime.sample()}};
@@ -239,7 +240,8 @@ EventLogistics SyntheticDataGenerator::produceLogistics(
 
     // Initialize event logistics
     EventLogistics el;
-    el.eid = e.id;
+    el.eid  = e.id;
+    el.meid = e.mid;
 
     // Check event capacity; the leisure event is always attendable
     if (e.cap.find(-1) != e.cap.end() || // leisure event
@@ -272,6 +274,13 @@ EventLogistics SyntheticDataGenerator::produceLogistics(
         // cannot attend the event. 
         if (!el.tp)
             return EventLogistics{};
+
+        // Check CP, CE, PE constraints
+        if (!dl.CS.checkCPConstraints(el.sid, p.id, currDT) || 
+            !dl.CS.checkCEConstraints(el.sid, e.id, currDT) ||
+            !dl.CS.checkPEConstraints(p.id,   e.id, currDT)) {
+            return EventLogistics{};
+        }
     }
 
     return el;

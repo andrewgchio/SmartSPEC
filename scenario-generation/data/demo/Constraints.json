@@ -1,0 +1,34 @@
+[
+    {
+        "person-id" : 1,
+        "space-id" : 19,
+        "required-metaevent-ids" : [ { "metaevent-id" : 1, "range" : [2,-1] } ]
+    },
+    {
+        "metaperson-id" : 2,
+        "space-id" : 19,
+        "required-metaevent-ids" : [ { "metaevent-id" : 2, "range" : [3,-1] } ]
+    },
+    {
+        "metaperson-id" : 3,
+        "space-id" : 0,
+        "time-profile" : []
+    },
+
+    {
+        "metaevent-id" : 6, 
+        "space-id" : 1200,
+        "capacity" : [1,2],
+        "time-profile" : []
+    },
+    {
+        "metaperson-id" : 5,
+        "metaevent-id" : 6,
+        "range" : [2,5]
+    },
+    {
+        "metaperson-id" : 7,
+        "metaevent-id" : 8,
+        "countdown" : ["01:00:00", "00:00:00"]
+    }
+]

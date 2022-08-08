@@ -23,6 +23,7 @@ public:
 
     // Queries
     bool canAttend(MetaPersonID mid);
+    int totalCapacity() const;
 
     // Modifiers
     void enrollMetaPerson(MetaPersonID mid);
@@ -51,6 +52,14 @@ bool Event::canAttend(MetaPersonID mid) {
         return rit == cap.end() ? false : rit->second.second != 0;
 
     return eit->second.second <= rit->second.second;
+}
+
+// Returns the total maximum capacity of the event
+int Event::totalCapacity() const {
+    int total = 0;
+    for (const auto& e : cap)
+        total += e.second.second; // max cap
+    return total;
 }
 
 ////////////////////////////////////////////////////////////////////////////////

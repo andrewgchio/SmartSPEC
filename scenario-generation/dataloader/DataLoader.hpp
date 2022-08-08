@@ -9,6 +9,7 @@
 #include "EventsLoader.hpp"
 #include "PeopleLoader.hpp"
 #include "SensorsLoader.hpp"
+#include "ConstraintsLoader.hpp"
 
 #include "MetaEventsLoader.hpp"
 #include "MetaPeopleLoader.hpp"
@@ -44,6 +45,8 @@ public:
     EventsLoader  E;
     SpacesLoader  C;
 
+    ConstraintsLoader CS;
+
     MetaEventsLoader ME;
     MetaPeopleLoader MP;
     MetaTrajectoriesLoader MT;
@@ -62,6 +65,7 @@ DataLoader::DataLoader(const Filename& fname)
     : config{fname}, 
       C{config("filepaths","spaces"), config("filepaths","spaces-cache","")},
       S{config("filepaths","sensors")},
+      CS{config("filepaths","constraints", "none")},
       MP{config("filepaths","metapeople")},
       ME{config("filepaths","metaevents")},
       MT{config("filepaths","metatrajectories","none"), 
@@ -69,19 +73,27 @@ DataLoader::DataLoader(const Filename& fname)
          C},
       start{config("synthetic-data-generator","start")},
       end{config("synthetic-data-generator","end")}
-{}
+{
+    CS.addSpaces(C);
+    CS.addMetaEvents(ME);
+    CS.addMetaPeople(MP);
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 // Load data from entity generation
 
 // Load events from the events file, after entity generation
-void DataLoader::loadEvents() 
-{ E = EventsLoader{config("filepaths", "events")}; }
+void DataLoader::loadEvents() { 
+    E = EventsLoader{config("filepaths", "events")}; 
+    CS.addEvents(E);
+}
 
 // Load people from the events file, after entity generation
-void DataLoader::loadPeople() 
-{ P = PeopleLoader{config("filepaths", "people")}; }
+void DataLoader::loadPeople() { 
+    P = PeopleLoader{config("filepaths", "people")}; 
+    CS.addPeople(P);
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
@@ -114,6 +126,7 @@ std::ostream& operator<<(std::ostream& oss, const DataLoader& dl) {
         << dl.C
         << dl.P
         << dl.E
+        << dl.CS
         << dl.MP
         << dl.ME
         << std::endl;

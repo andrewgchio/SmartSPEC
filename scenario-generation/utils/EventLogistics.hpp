@@ -31,6 +31,9 @@ public:
     Trajectory traj;
     TimePeriod tp;
 
+    // Bookkeeping information
+    MetaEventID meid;
+
 };
 
 ////////////////////////////////////////////////////////////////////////////////

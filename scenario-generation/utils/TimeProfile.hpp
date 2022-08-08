@@ -142,6 +142,7 @@ class TimeProfile {
 public:
     
     // Constructor
+    TimeProfile();
     explicit TimeProfile(const rj::Value& profileList);
 
     // Data structure to hold an entry of a time profile
@@ -382,6 +383,8 @@ std::ostream& operator<<(std::ostream& oss, const TPPattern& p)
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 // TimeProfile
+
+TimeProfile::TimeProfile() {}
 
 // Read the profile list from the rapidjson value and construct a time profile
 TimeProfile::TimeProfile(const rj::Value& profileList) {
