@@ -13,6 +13,7 @@
 
 #include "MetaEventsLoader.hpp"
 #include "MetaPeopleLoader.hpp"
+#include "MetaSensorsLoader.hpp"
 #include "MetaTrajectoriesLoader.hpp"
 
 #include "../utils/Typedefs.hpp"
@@ -49,6 +50,7 @@ public:
 
     MetaEventsLoader ME;
     MetaPeopleLoader MP;
+    MetaSensorsLoader MS;
     MetaTrajectoriesLoader MT;
 
     Date start, end;
@@ -68,6 +70,7 @@ DataLoader::DataLoader(const Filename& fname)
       CS{config("filepaths","constraints", "none")},
       MP{config("filepaths","metapeople")},
       ME{config("filepaths","metaevents")},
+      MS{config("filepaths","metasensors")},
       MT{config("filepaths","metatrajectories","none"), 
          config("filepaths","path-cache","none"),
          C},
@@ -127,6 +130,7 @@ std::ostream& operator<<(std::ostream& oss, const DataLoader& dl) {
         << dl.P
         << dl.E
         << dl.CS
+        << dl.MS
         << dl.MP
         << dl.ME
         << std::endl;

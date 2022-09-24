@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <vector>
+#include <set>
 #include <random>
 #include <algorithm>
 
@@ -19,6 +20,7 @@ public:
     // Constructors
     RandomSelector();
     explicit RandomSelector(const std::vector<T>& vec);
+    explicit RandomSelector(const std::set<T>& values);
     RandomSelector(const std::vector<T>& vec, const std::vector<double>& prs);
 
     // Queries
@@ -56,6 +58,12 @@ RandomSelector<T>::RandomSelector(const std::vector<T>& vec)
     : vec{vec}, prs(vec.size()) {
     std::fill(prs.begin(), prs.end(), 1);
 }
+
+// Construct a random uniform selector with the values in set
+template <class T>
+RandomSelector<T>::RandomSelector(const std::set<T>& values)
+    : RandomSelector{std::vector<T>(values.begin(), values.end())}
+{}
 
 // Construct a selector with the values in vec, according to probabilities prs
 template <class T>

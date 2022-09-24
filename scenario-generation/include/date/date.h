@@ -137,6 +137,7 @@ namespace date
 #  define NOEXCEPT noexcept
 #endif
 
+#define HAS_UNCAUGHT_EXCEPTIONS 1 // EDIT: enable uncaught exceptions
 #ifndef HAS_UNCAUGHT_EXCEPTIONS
 #  if __cplusplus > 201703 || (defined(_MSVC_LANG) && _MSVC_LANG > 201703L)
 #    define HAS_UNCAUGHT_EXCEPTIONS 1

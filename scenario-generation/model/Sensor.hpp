@@ -11,10 +11,10 @@ public:
 
     // Attributes
     SensorID id;
+    MetaSensorID mid;
     Description desc;
-    Mobility mob;
+    Coordinates coords;
     Coverage cov;
-    Interval intr;
 
     // I/O
     friend std::ostream& operator<<(std::ostream& oss, const Sensor& s);
@@ -28,10 +28,10 @@ public:
 std::ostream& operator<<(std::ostream& oss, const Sensor& s) {
     oss << "Sensor("
         << "id=" << s.id << ", "
+        << "msid=" << s.mid << ", "
         << "desc=\"" << s.desc << "\", "
-        << "mob=" << s.mob << ", "
-        << "cov=" << s.cov << ", "
-        << "intr=" << s.intr
+        << "coords=" << s.coords << ", "
+        << "cov=" << s.cov
         << ")";
     return oss;
 }

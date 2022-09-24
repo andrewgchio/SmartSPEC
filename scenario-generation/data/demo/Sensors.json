@@ -1,205 +1,247 @@
 [
     {
-        "id": 0,
-        "description": "stairs 1 sensor",
-        "mobility": "static",
-        "coverage": [1,2],
-        "interval": 15
-    },
-    {
         "id": 1,
-        "description": "lobby 1 sensor",
-        "mobility": "static",
-        "coverage": [3,4,5],
-        "interval": 15
+        "description": "main-lobby1 (WiFi AP)",
+        "metasensor-id": 1,
+        "coordinates": [10,14,1],
+        "coverage": [3,1,4]
     },
     {
         "id": 2,
-        "description": "elevator 1 sensor",
-        "mobility": "static",
-        "coverage": [3,4,5,6,7,8],
-        "interval": 15
+        "description": "lobby-1427-1429 (WiFi AP)",
+        "metasensor-id": 1,
+        "coordinates": [13,16,1],
+        "coverage": [11,10,14271,14291]
     },
     {
         "id": 3,
-        "description": "restroom sensor",
-        "mobility": "static",
-        "coverage": [9,10,11],
-        "interval": 15
+        "description": "main-lobb2 (WiFi AP)",
+        "metasensor-id": 1,
+        "coordinates": [9,12,7],
+        "coverage": [18,20111,16,20]
     },
     {
         "id": 4,
-        "description": "lobby 1427-1429 sensor",
-        "mobility": "static",
-        "coverage": [11,12,10],
-        "interval": 15
+        "description": "1100 (WiFi AP)",
+        "metasensor-id": 1,
+        "coordinates": [20,4,1],
+        "coverage": [1100,11001,11002]
     },
     {
         "id": 5,
-        "description": "stairs 2 sensor",
-        "mobility": "static",
-        "coverage": [13,14],
-        "interval": 15
+        "description": "1200 (WiFi AP)",
+        "metasensor-id": 1,
+        "coordinates": [23,10,1],
+        "coverage": [1200,12001,12002]
     },
     {
         "id": 6,
-        "description": "elevator 2 sensor",
-        "mobility": "static",
-        "coverage": [15,16,17],
-        "interval": 15
+        "description": "1300 (WiFi AP)",
+        "metasensor-id": 1,
+        "coordinates": [20,10,1],
+        "coverage": [1300,13001,13002]
     },
     {
         "id": 7,
-        "description": "lobby 2 sensor",
-        "mobility": "static",
-        "coverage": [18,19,20],
-        "interval": 15
+        "description": "1422 (WiFi AP)",
+        "metasensor-id": 1,
+        "coordinates": [3,8,1],
+        "coverage": [1422,1420,14221]
     },
     {
         "id": 8,
-        "description": "kitchen sensor",
-        "mobility": "static",
-        "coverage": [19,20],
-        "interval": 15
+        "description": "1433 (WiFi AP)",
+        "metasensor-id": 1,
+        "coordinates": [24,3,1],
+        "coverage": [1433,14331,1429,1427]
     },
     {
         "id": 9,
-        "description": "restroom 2 sensor",
-        "mobility": "static",
-        "coverage": [21,22,23],
-        "interval": 15
+        "description": "1500 (WiFi AP)",
+        "metasensor-id": 1,
+        "coordinates": [22,8,1],
+        "coverage": [1500,15001,15002,1433,1431]
     },
     {
         "id": 10,
-        "description": "1100",
-        "mobility": "static",
-        "coverage": [1100,11001,11002],
-        "interval": 15
+        "description": "2011 (WiFi AP)",
+        "metasensor-id": 1,
+        "coordinates": [11,18,7],
+        "coverage": [2011,20111]
     },
     {
         "id": 11,
-        "description": "1200",
-        "mobility": "static",
-        "coverage": [1200,12001,12002],
-        "interval": 15
+        "description": "2052 (WiFi AP)",
+        "metasensor-id": 1,
+        "coordinates": [11,3,7],
+        "coverage": [2048,2051,2052]
     },
     {
         "id": 12,
-        "description": "1300",
-        "mobility": "static",
-        "coverage": [1300,13001,13002],
-        "interval": 15
+        "description": "2059 (WiFi AP)",
+        "metasensor-id": 1,
+        "coordinates": [17,7,7],
+        "coverage": [2059,2061,2062]
     },
     {
         "id": 13,
-        "description": "1420-1422",
-        "mobility": "static",
-        "coverage": [1420,1422,14201,14221],
-        "interval": 15
+        "description": "2069 (WiFi AP)",
+        "metasensor-id": 1,
+        "coordinates": [20,10,7],
+        "coverage": [2069,2068,2066,2065]
     },
     {
         "id": 14,
-        "description": "1423-1425",
-        "mobility": "static",
-        "coverage": [1423,1425,14231,14232,14251],
-        "interval": 15
+        "description": "2076 (WiFi AP)",
+        "metasensor-id": 1,
+        "coordinates": [26,3,7],
+        "coverage": [2076,2081,2082]
     },
     {
         "id": 15,
-        "description": "1427-1429",
-        "mobility": "static",
-        "coverage": [11,1427,1429,14271,14291],
-        "interval": 15
+        "description": "2084 (WiFi AP)",
+        "metasensor-id": 1,
+        "coordinates": [29,6,7],
+        "coverage": [2084,2086,2088,2089]
     },
     {
         "id": 16,
-        "description": "1431-1433-1500",
-        "mobility": "static",
-        "coverage": [1431,1433,1500,14311],
-        "interval": 15
+        "description": "12001 (Door)",
+        "metasensor-id": 2,
+        "coordinates": [9,27,1],
+        "coverage": [12001]
     },
     {
         "id": 17,
-        "description": "1500",
-        "mobility": "static",
-        "coverage": [1500,15001,15002,15003],
-        "interval": 15
+        "description": "12002 (Door)",
+        "metasensor-id": 2,
+        "coordinates": [13,22,1],
+        "coverage": [12002]
     },
     {
         "id": 18,
-        "description": "1600",
-        "mobility": "static",
-        "coverage": [1600,16001,16002],
-        "interval": 15
+        "description": "1420 (Door)",
+        "metasensor-id": 2,
+        "coordinates": [3,11,1],
+        "coverage": [1420]
     },
     {
         "id": 19,
-        "description": "2011",
-        "mobility": "static",
-        "coverage": [2011,20111],
-        "interval": 15
+        "description": "1422 (Door)",
+        "metasensor-id": 2,
+        "coordinates": [3,8,1],
+        "coverage": [1422]
     },
     {
         "id": 20,
-        "description": "2048-2051-2052",
-        "mobility": "static",
-        "coverage": [2048,2051,2052,20481,20521],
-        "interval": 15
+        "description": "1500 (Door)",
+        "metasensor-id": 2,
+        "coordinates": [22,8,1],
+        "coverage": [1500]
     },
     {
         "id": 21,
-        "description": "2054-2056-2058",
-        "mobility": "static",
-        "coverage": [2054,2056,2058,20541,20561,20581],
-        "interval": 15
+        "description": "main-lobby1 (Temperature)",
+        "metasensor-id": 3,
+        "coordinates": [10,14,1],
+        "coverage": [3,1,4]
     },
     {
         "id": 22,
-        "description": "2059-2061",
-        "mobility": "static",
-        "coverage": [2059,2061],
-        "interval": 15
+        "description": "lobby-1427-1429 (Temperature)",
+        "metasensor-id": 3,
+        "coordinates": [13,16,1],
+        "coverage": [11,10,14271,14291]
     },
     {
         "id": 23,
-        "description": "2062-2064-2068",
-        "mobility": "static",
-        "coverage": [2062,2064,2068,20621,20641,20681],
-        "interval": 15
+        "description": "main-lobb2 (Temperature)",
+        "metasensor-id": 3,
+        "coordinates": [9,12,7],
+        "coverage": [18,20111,16,20]
     },
     {
         "id": 24,
-        "description": "2065-2066",
-        "mobility": "static",
-        "coverage": [2065,2066,20661],
-        "interval": 15
+        "description": "1100 (Temperature)",
+        "metasensor-id": 3,
+        "coordinates": [20,4,1],
+        "coverage": [1100,11001,11002]
     },
     {
         "id": 25,
-        "description": "2069-2072-2074-2076-2081",
-        "mobility": "static",
-        "coverage": [2069,2072,2074,2076,2081,20721,20741,20761],
-        "interval": 15
+        "description": "1200 (Temperature)",
+        "metasensor-id": 3,
+        "coordinates": [23,10,1],
+        "coverage": [1200,12001,12002]
     },
     {
         "id": 26,
-        "description": "2082-2084-2086",
-        "mobility": "static",
-        "coverage": [2082,2084,2086,20821,20841,20861],
-        "interval": 15
+        "description": "1300 (Temperature)",
+        "metasensor-id": 3,
+        "coordinates": [20,10,1],
+        "coverage": [1300,13001,13002]
     },
     {
         "id": 27,
-        "description": "2088-2089-2092-2099",
-        "mobility": "static",
-        "coverage": [2088,2089,2092,2099,20881,20911,20921],
-        "interval": 15
+        "description": "1422 (Temperature)",
+        "metasensor-id": 3,
+        "coordinates": [3,8,1],
+        "coverage": [1422,1420,14221]
     },
     {
         "id": 28,
-        "description": "exit 2 sensor",
-        "mobility": "static",
-        "coverage": [2092,20921,20922,20923],
-        "interval": 15
+        "description": "1433 (Temperature)",
+        "metasensor-id": 3,
+        "coordinates": [24,3,1],
+        "coverage": [1433,14331,1429,1427]
+    },
+    {
+        "id": 29,
+        "description": "1500 (Temperature)",
+        "metasensor-id": 3,
+        "coordinates": [22,8,1],
+        "coverage": [1500,15001,15002,1433,1431]
+    },
+    {
+        "id": 30,
+        "description": "2011 (Temperature)",
+        "metasensor-id": 3,
+        "coordinates": [11,18,7],
+        "coverage": [2011,20111]
+    },
+    {
+        "id": 31,
+        "description": "2052 (Temperature)",
+        "metasensor-id": 3,
+        "coordinates": [11,3,7],
+        "coverage": [2048,2051,2052]
+    },
+    {
+        "id": 32,
+        "description": "2059 (Temperature)",
+        "metasensor-id": 3,
+        "coordinates": [17,7,7],
+        "coverage": [2059,2061,2062]
+    },
+    {
+        "id": 33,
+        "description": "2069 (Temperature)",
+        "metasensor-id": 3,
+        "coordinates": [20,10,7],
+        "coverage": [2069,2068,2066,2065]
+    },
+    {
+        "id": 34,
+        "description": "2076 (Temperature)",
+        "metasensor-id": 3,
+        "coordinates": [26,3,7],
+        "coverage": [2076,2081,2082]
+    },
+    {
+        "id": 35,
+        "description": "2084 (Temperature)",
+        "metasensor-id": 3,
+        "coordinates": [29,6,7],
+        "coverage": [2084,2086,2088,2089]
     }
 ]

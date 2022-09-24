@@ -64,7 +64,6 @@ void Person::setCurrentSpace(SpaceID cid) { currSpace = cid; }
 void Person::addAttendedEvent(EventLogistics el) { 
     attended.insert(el); 
     attendedEventIDs.insert(el.eid);
-    std::cout << "Person::addAttendedEvent try adding 1 to map" << std::endl;
     attendedMetaEventIDs[el.meid] += 1;
 }
 

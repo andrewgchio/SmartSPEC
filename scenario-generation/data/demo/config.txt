@@ -1,23 +1,23 @@
 [people]
-number = 200
+number = 1000
 generation = all
 
 [events]
-number = 500
-generation = diff
+number = 1500
+generation = all
 
 [synthetic-data-generator]
-start = 2020-01-01
-end   = 2020-01-02
+start = 2020-01-06
+end   = 2020-01-10
 
 [filepaths]
 metapeople      = data/demo/MetaPeople.json
 metaevents      = data/demo/MetaEvents.json
+metasensors     = data/demo/MetaSensors.json
 people          = data/demo/People.json
 events          = data/demo/Events.json
 sensors         = data/demo/Sensors.json
 spaces          = data/demo/Spaces.json
-constraints     = data/demo/Constraints.json
 output          = data/demo/output/
 generated-files = data/demo/
 path-cache      = data/demo/output/path-cache.csv

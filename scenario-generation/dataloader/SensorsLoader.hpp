@@ -22,6 +22,7 @@ public:
     // Queries
     int size() const;
     const SensorIDList& getIDs() const;
+    const SensorIDList& getIDs(MetaSensorID mid) const;
 
     Sensor& operator[](SensorID id);
     const Sensor& operator[](SensorID id) const;
@@ -37,14 +38,18 @@ public:
     friend std::ostream& operator<<(std::ostream& oss, const SensorsLoader& sl);
 
 private:
+
     // A map of the sensor id to the index in the list `entries`
     SensorIDIndexMap loc;
 
     // A list of sensors
     std::vector<Sensor> entries;
 
-    // A list of sensor ids
+    // A list of all sensor ids
     SensorIDList ids;
+
+    // A map of metasensor id to corresponding sensors
+    std::map<MetaSensorID, SensorIDList> idsByMetaSensorID;
 
 };
 
@@ -71,21 +76,18 @@ SensorsLoader::SensorsLoader(const Filename& fname) {
 
         // id
         s.id = parseInt(v, "id");
+
+        // metasensor-id
+        s.mid = parseInt(v, "metasensor-id");
         
         // description
         s.desc = parseStr(v, "description", "");
 
-        // interval 
-        s.intr = parseInt(v, "interval");
-
-        // mobility
-        s.mob = parseStr(v, "mobility");
+        // coordinates
+        s.coords = parseIntArr(v, "coordinates");
 
         // coverage
-        if (s.mob == "static") 
-            s.cov = parseIntArr(v, "coverage");
-        else if (s.mob == "mobile")
-            s.cov = PersonIDList{parseInt(v, "coverage")};
+        s.cov = parseIntArr(v, "coverage");
 
         // Add the person to the data loader
         add(s);
@@ -101,6 +103,10 @@ int SensorsLoader::size() const { return entries.size(); }
 
 // Return a list of all the sensor ids
 const SensorIDList& SensorsLoader::getIDs() const { return ids; }
+
+// Return a list of all sensor ids with the given metasensor id
+const SensorIDList& SensorsLoader::getIDs(MetaSensorID mid) const 
+{ return idsByMetaSensorID.at(mid); }
 
 // Return a reference to the sensor with hte given id
 Sensor& SensorsLoader::operator[](SensorID id) { return entries[loc[id]]; }
@@ -128,6 +134,7 @@ void SensorsLoader::add(const Sensor& s) {
     ids.push_back(s.id);
     loc[s.id] = entries.size();
     entries.push_back(s);
+    idsByMetaSensorID[s.mid].push_back(s.id);
 }
 
 ////////////////////////////////////////////////////////////////////////////////

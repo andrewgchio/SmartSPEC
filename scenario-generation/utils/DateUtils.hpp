@@ -85,6 +85,7 @@ public:
     explicit DateTime(const std::string& s="1970-01-01 00:00:00");
     explicit DateTime(const date::sys_days& d);
     explicit DateTime(const date::sys_seconds& s);
+    explicit DateTime(long s);
     DateTime(const Date& d, const Time& t);
 
     // Queries
@@ -111,6 +112,9 @@ DateTime::DateTime(const date::sys_days& d) : date::sys_seconds{d} {}
 
 // Construct a datetime from the date::sys_seconds type
 DateTime::DateTime(const date::sys_seconds& s) : date::sys_seconds{s} {}
+
+// Construct a datetime from the number of seconds since epoch
+DateTime::DateTime(long s) : date::sys_seconds(std::chrono::seconds{s}) {}
 
 // Construct a datetime from the given date and time
 DateTime::DateTime(const Date& d, const Time& t) 

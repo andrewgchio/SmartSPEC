@@ -1,0 +1,14 @@
+[
+    {
+        "id" : 1,
+        "description" : "WiFi Sensor"
+    },
+    {
+        "id" : 2,
+        "description" : "Door Sensor"
+    },
+    {
+        "id" : 3,
+        "description" : "Temperature Sensors"
+    }
+]
