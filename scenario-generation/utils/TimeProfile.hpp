@@ -15,6 +15,7 @@
 
 #include "DateUtils.hpp"
 #include "IOUtils.hpp"
+#include "RandomGenerator.hpp"
 #include "NormalDistributions.hpp"
 
 namespace {
@@ -454,22 +455,46 @@ TimePeriod TimeProfile::query(const DateTime& eta, bool useETA) {
     for (TimeProfileEntry& e : tp) {
         const DateList& dl = e.pat.dates();
         if (std::find(dl.begin(), dl.end(), d) != dl.end()) {
-            Time start = e.start.sample();
-            if (useETA &&                     // consider the current time
-                t + e.start.stdev() < start)  // current time is too early
-                continue;
-            start = std::max(start, t);
+            if (useETA) {
+                Time start = e.start.sample();
+                if (t + e.start.stdev() < start) // current time is too early
+                    continue;
+                start = std::max(start, t);
 
-            Time end = e.end.sample();
-            if (start > end)                  // end time before start time
-                continue;
+                Time end = e.end.sample();
+                if (start > end) // end time before start time
+                    continue;
 
-            Time req{start + e.req.sample()}; 
-            if (req > end)                    // cannot attend required time
-                continue;
-            end = req;
+                Time req{start + e.req.sample()}; 
+                if (req > end) // cannot attend required time
+                    continue;
+                end = req;
 
-            return TimePeriod{DateTime{d, start}, DateTime{d, end}};
+                return TimePeriod{DateTime{d, start}, DateTime{d, end}};
+            }
+
+            // Generally for finding active times for people; we just determine
+            // the amount of time they should be in the space
+            else {
+                // Select start/end range of times
+                Time start = e.start.sample();
+                Time end   = e.end.sample();
+
+                if (start > end) // end time is before start time
+                    continue;
+
+                // Get required time
+                Time req = e.req.sample();
+                int nSecs = ((end-req) - start).count();
+                if (nSecs <= 0) // not enough time for req
+                    continue;
+
+                // Shave start/end time to fit required time
+                start = Time{randInt(((end-req) - start).count())};
+                end   = start + req;
+
+                return TimePeriod{DateTime{d, start}, DateTime{d, end}};
+            }
         }
     }
     return TimePeriod{}; // Nothing found.
