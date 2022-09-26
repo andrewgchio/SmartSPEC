@@ -159,8 +159,6 @@ TimeList MetaTrajectoriesLoader::estTime(const SpaceIDList& sl) const {
         int d = manhattan(cl[sl[i]].coords, cl[sl[i+1]].coords);
         tl.push_back(NormalTime{Time{d*5}, Time{d*1}}.sample());
     }
-    std::cout << sl << std::endl;
-    std::cout << tl << std::endl;
     return tl;
 }
 
