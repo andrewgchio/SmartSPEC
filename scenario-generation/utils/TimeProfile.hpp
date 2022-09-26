@@ -490,7 +490,7 @@ TimePeriod TimeProfile::query(const DateTime& eta, bool useETA) {
                     continue;
 
                 // Shave start/end time to fit required time
-                start = Time{randInt(((end-req) - start).count())};
+                start = start + Time{nSecs};
                 end   = start + req;
 
                 return TimePeriod{DateTime{d, start}, DateTime{d, end}};
