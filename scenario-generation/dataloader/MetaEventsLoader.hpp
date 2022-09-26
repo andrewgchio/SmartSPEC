@@ -205,6 +205,12 @@ void MetaEventsLoader::addOutMetaEvent() {
         me.desc = "out-of-simulation (added)";
         me.pr = 1.0;
         me.selector = SpaceSelector{SpaceIDList{0}};
+        me.tps = TimeProfileList{TimeProfile{}};
+        me.tpsPrs = ProbabilityList{1};
+        me.cap[-1] = std::make_pair(
+                Normal<int>{0,0},
+                Normal<int>{MAX_METAEVENT_CAPACITY,0}
+        );
         add(me);
     }
 }
@@ -220,6 +226,12 @@ void MetaEventsLoader::addLeisureMetaEvent() {
         me.desc = "leisure (added)";
         me.pr = 1.0;
         me.selector = SpaceSelector{SpaceIDList{0}};
+        me.tps = TimeProfileList{TimeProfile{}};
+        me.tpsPrs = ProbabilityList{1};
+        me.cap[-1] = std::make_pair(
+                Normal<int>{0,0},
+                Normal<int>{MAX_METAEVENT_CAPACITY,0}
+        );
         add(me);
     }
 }
