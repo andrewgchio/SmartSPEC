@@ -1,0 +1,23 @@
+[people]
+number     = 200
+generation = all
+
+[events]
+number     = 500
+generation = all
+
+[synthetic-data-generator]
+start = 2018-02-12
+end   = 2018-03-02
+
+[filepaths]
+metapeople      = data/data-gui/MetaPeople.json
+metaevents      = data/data-gui/MetaEvents.json
+metasensors     = data/data-gui/MetaSensors.json
+people          = data/data-gui/People.json
+events          = data/data-gui/Events.json
+spaces          = data/data-gui/Spaces.json
+sensors         = data/data-gui/Sensors.json
+output          = data/data-gui/output/
+generated-files = data/data-gui/
+path-cache      = data/data-gui/output/path-cache.csv
