@@ -124,6 +124,22 @@ std::vector<int> parseIntArr(const rj::Value& v, const char* m) {
     std::exit(1);
 }
 
+// Parses a double array from the rapidjson value
+std::vector<double> parseDoubleArr(const rj::Value& v, const char* m) {
+    if (v.HasMember(m)) {
+        std::vector<double> arr;
+        arr.reserve(v[m].Size());
+
+        for (const rj::Value& x : v[m].GetArray())
+            arr.push_back(x.GetDouble());
+
+        return arr;
+    }
+
+    std::cerr << "JSON object cannot parse double array " << m << std::endl;
+    std::exit(1);
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 // operator<< for various types
@@ -167,6 +183,7 @@ std::ostream& operator<<(std::ostream& oss, const std::map<K,V>& m) {
     if (!m.empty()) {
         typename std::map<K,V>::const_iterator it = m.begin();
         oss << it->first << " : " << it->second;
+        ++it;
         for (; it != m.end(); ++it)
             oss << ", " << it->first << " : " << it->second;
     }
