@@ -84,7 +84,7 @@ SensorsLoader::SensorsLoader(const Filename& fname) {
         s.desc = parseStr(v, "description", "");
 
         // coordinates
-        s.coords = parseIntArr(v, "coordinates");
+        s.coords = parseDoubleArr(v, "coordinates");
 
         // coverage
         s.cov = parseIntArr(v, "coverage");

@@ -83,7 +83,7 @@ SpacesLoader::SpacesLoader(const Filename& fname, const Filename& cache) {
         c.desc = parseStr(v, "description", "");
 
         // coordinates
-        c.coords = parseIntArr(v, "coordinates");
+        c.coords = parseDoubleArr(v, "coordinates");
 
         // capacity
         c.cap = parseInt(v, "capacity");

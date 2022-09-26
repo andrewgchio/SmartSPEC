@@ -27,7 +27,7 @@ using Index           = int;
 using Description     = std::string;
 using Probability     = double; 
 using ProbabilityList = std::vector<Probability>;
-using Coordinates     = std::vector<int>;
+using Coordinates     = std::vector<double>;
 
 // SmartSPEC Concepts
 using PersonID     = int;
