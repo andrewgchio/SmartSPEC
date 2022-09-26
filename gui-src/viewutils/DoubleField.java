@@ -1,0 +1,77 @@
+package viewutils;
+
+import javafx.scene.control.TextField;
+
+/**
+ * A text field that only accepts doubles
+ */
+public class DoubleField extends TextField {
+
+    ////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////
+    // Constants
+    ////////////////////////////////////////////////////////////////////////////
+
+    /**
+     * Width of the DoubleField text box
+     */
+    public static final int NUM_WIDTH = 50;
+
+    ////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////
+    // Constructors
+    ////////////////////////////////////////////////////////////////////////////
+
+    /**
+     * Construct a DoubleField object
+     */
+    public DoubleField() {
+        super();
+
+        this.setMaxWidth(NUM_WIDTH);
+    }
+    
+    /**
+     * Construct a DoubleField object with default value
+     * @param d A double value
+     */
+    public DoubleField(Double d) {
+        super(d.toString());
+        
+        this.setMaxWidth(NUM_WIDTH);
+    }
+    ////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////
+    // Getter Methods
+    ////////////////////////////////////////////////////////////////////////////
+
+    /**
+     * Return a double representing the input double value
+     *
+     * @return The input double
+     */
+    public Double getValue() {
+        try {
+            return Double.parseDouble(getText());
+        }
+        catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Invalid double: " + getText());
+        }
+    }
+
+    ////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////
+    // Setter Methods
+    ////////////////////////////////////////////////////////////////////////////
+
+    /**
+     * Set the double
+     *
+     * @param x The double to set
+     */
+    public void setValue(Double x) {
+        if (x != null)
+            setText(x.toString());
+    }
+
+}

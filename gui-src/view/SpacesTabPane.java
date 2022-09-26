@@ -1,0 +1,70 @@
+package view;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import javafx.scene.control.TabPane;
+import model.BackdropModel.Backdrop;
+
+/**
+ * The Spaces TabPane is used to display the backdrop and associated spaces.
+ */
+public class SpacesTabPane extends TabPane {
+
+    ////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////
+    // Instance Variables
+    ////////////////////////////////////////////////////////////////////////////
+
+    /**
+     * Map containing index where backdrops are stored
+     */
+    private Map<String, Integer> tabIndex = new HashMap<>();
+
+    ////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////
+    // Constructors
+    ////////////////////////////////////////////////////////////////////////////
+
+    /**
+     * Construct a SpaceTabPane object
+     */
+    public SpacesTabPane() {
+        super();
+
+        this.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
+    }
+
+    ////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////
+    // Tab and Canvas Controls
+    ////////////////////////////////////////////////////////////////////////////
+
+    /**
+     * Add a space tab to the tab pane
+     * 
+     * @param bd The backdrop for the space tab
+     */
+    public void addTab(Backdrop bd) {
+        super.getTabs().add(new SpaceTab(bd));
+        tabIndex.put(bd.getFloor(), this.getTabs().size() - 1);
+        update(bd.getFloor());
+    }
+
+    ////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////
+    // Update Methods
+    ////////////////////////////////////////////////////////////////////////////
+
+    /**
+     * Update the tab with the given floor name
+     * 
+     * @param floor The floor (backdrop) to update
+     */
+    public void update(String floor) {
+        int      idx = tabIndex.get(floor);
+        SpaceTab tab = (SpaceTab) super.getTabs().get(idx);
+        tab.update(true);
+    }
+
+}

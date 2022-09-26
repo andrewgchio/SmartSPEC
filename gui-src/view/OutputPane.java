@@ -1,0 +1,58 @@
+package view;
+
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.VBox;
+
+/**
+ * Output pane to display log messages
+ */
+public class OutputPane extends ScrollPane {
+
+    ////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////
+    // Instance Variables
+    ////////////////////////////////////////////////////////////////////////////
+
+    /**
+     * The log content
+     */
+    private VBox content;
+
+    ////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////
+    // Constructors
+    ////////////////////////////////////////////////////////////////////////////
+
+    /**
+     * Construct the basic components for an output log pane
+     */
+    public OutputPane() {
+        super();
+
+        // Initialize output pane
+        content = new VBox();
+        content.heightProperty().addListener(o -> this.setVvalue(1));
+
+        // Add first log
+        log("Output Log:");
+
+        // Set the content of the ScrollPane
+        this.setContent(content);
+    }
+
+    ////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////
+    // Other Methods
+    ////////////////////////////////////////////////////////////////////////////
+
+    /**
+     * Create an entry in the view's log with the given text
+     * 
+     * @param text The entry to add
+     */
+    public void log(String text) {
+        content.getChildren().add(new Label(text));
+    }
+
+}
