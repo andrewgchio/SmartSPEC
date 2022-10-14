@@ -63,6 +63,46 @@ implements Iterable<model.TimeProfilesModel.TimeProfile> {
 
     ////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////
+    // Time Profile Constants
+    ////////////////////////////////////////////////////////////////////////////
+
+
+    /**
+     * Time Profile implemented periods
+     */
+    private enum Period { DAY, WEEK }
+
+    /**
+     * Output date format as string "yyyy-MM-dd"
+     */
+    public final static String D_FORMAT = "yyyy-MM-dd";
+
+    /**
+     * Formatter that follows the pattern "yyyy-MM-dd"
+     */
+    public final static DateTimeFormatter D_FORMATTER = 
+            DateTimeFormatter.ofPattern(D_FORMAT);
+
+    /**
+     * Output time format as string "HH:mm"
+     */
+    public final static String T_FORMAT = "HH:mm";
+
+    /**
+     * Formatter that follows the pattern "HH:mm"
+     */
+    public final static DateTimeFormatter T_FORMATTER = 
+            DateTimeFormatter.ofPattern(T_FORMAT);
+
+    /**
+     * Formatter the follows the ISO format for time
+     */
+    public final static DateTimeFormatter T_LAZY_FORMATTER = 
+            DateTimeFormatter.ISO_LOCAL_TIME;
+
+
+    ////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////
     // Time Profile Definition
     ////////////////////////////////////////////////////////////////////////////
 
@@ -84,41 +124,6 @@ implements Iterable<model.TimeProfilesModel.TimeProfile> {
 
         // Only for period = week
         private Set<String> days = new LinkedHashSet<>();
-
-        private enum Period { DAY, WEEK }
-
-        ////////////////////////////////////////////////////////////////////////
-        ////////////////////////////////////////////////////////////////////////
-        // Constants
-        ////////////////////////////////////////////////////////////////////////
-
-        /**
-         * Output date format as string "yyyy-MM-dd"
-         */
-        public final static String D_FORMAT = "yyyy-MM-dd";
-
-        /**
-         * Formatter that follows the pattern "yyyy-MM-dd"
-         */
-        public final static DateTimeFormatter D_FORMATTER = 
-                DateTimeFormatter.ofPattern(D_FORMAT);
-
-        /**
-         * Output time format as string "HH:mm"
-         */
-        public final static String T_FORMAT = "HH:mm";
-
-        /**
-         * Formatter that follows the pattern "HH:mm"
-         */
-        public final static DateTimeFormatter T_FORMATTER = 
-                DateTimeFormatter.ofPattern(T_FORMAT);
-
-        /**
-         * Formatter the follows the ISO format for time
-         */
-        public final static DateTimeFormatter T_LAZY_FORMATTER = 
-                DateTimeFormatter.ISO_LOCAL_TIME;
 
         ////////////////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////
@@ -644,7 +649,7 @@ implements Iterable<model.TimeProfilesModel.TimeProfile> {
         JSONObject details = new JSONObject();
         if (tp.getRepeat() != 1)
             details.put("repeat-every", tp.getRepeat());
-        if (tp.period == TimeProfile.Period.WEEK) {
+        if (tp.period == Period.WEEK) {
             JSONArray days = new JSONArray();
             for (String d : tp.getDays()) {
                 switch (d) {
@@ -738,7 +743,7 @@ implements Iterable<model.TimeProfilesModel.TimeProfile> {
                 // period
                 tp.setPeriod((String) o.get("period"));
 
-                if (tp.period == TimeProfile.Period.WEEK) {
+                if (tp.period == Period.WEEK) {
                     JSONArray days = (JSONArray) o.get("days");
                     for (Object day : days)
                         tp.addDay((String) day);
@@ -810,7 +815,7 @@ implements Iterable<model.TimeProfilesModel.TimeProfile> {
             o.put("repeat", tp.getRepeat());
 
             // days
-            if (tp.period == TimeProfile.Period.WEEK) {
+            if (tp.period == Period.WEEK) {
                 JSONArray days = new JSONArray();
                 for (String d : tp.getDays())
                     days.add(d);

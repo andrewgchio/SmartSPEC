@@ -35,7 +35,7 @@ public class ErrorStringBuilder {
      * @return True if the StringBuilder contents are empty
      */
     public boolean isEmpty() {
-        return builder.isEmpty();
+        return builder.length() == 0;
     }
 
     /**
