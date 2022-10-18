@@ -533,13 +533,13 @@ public class ConfigModel {
             MyFileWriter f = new MyFileWriter(fname);
 
             f.writeln("[people]");
-            f.writeln("number     = " + eventsNumber);
-            f.writeln("generation = " + eventsGen);
+            f.writeln("number     = " + peopleNumber);
+            f.writeln("generation = " + peopleGen);
             f.writeln();
 
             f.writeln("[events]");
-            f.writeln("number     = " + peopleNumber);
-            f.writeln("generation = " + peopleGen);
+            f.writeln("number     = " + eventsNumber);
+            f.writeln("generation = " + eventsGen);
             f.writeln();
 
             f.writeln("[synthetic-data-generator]");
