@@ -1,6 +1,8 @@
 package form;
 
 import java.io.File;
+import java.nio.file.FileSystems;
+import java.nio.file.Paths;
 
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
@@ -116,7 +118,7 @@ public class ConfigForm extends Form {
             Window w        = selectButton.getParent().getScene().getWindow();
             File   selected = new DirectoryChooser().showDialog(w);
             if (selected != null)
-                selection.setText(selected.getAbsolutePath() + "/");
+                selection.setText(selected.getAbsolutePath());
         });
 
         return new VBox(selection, selectButton);
@@ -153,16 +155,19 @@ public class ConfigForm extends Form {
         if (baseDir.equals("None Selected"))
             throw new IllegalArgumentException("No directory selected");
 
-        cm.setMetaPeoplePath(baseDir + "MetaPeople.json");
-        cm.setMetaEventsPath(baseDir + "MetaEvents.json");
-        cm.setMetaSensorsPath(baseDir + "MetaSensors.json");
-        cm.setPeoplePath(baseDir + "People.json");
-        cm.setEventsPath(baseDir + "Events.json");
-        cm.setSpacesPath(baseDir + "Spaces.json");
-        cm.setSensorsPath(baseDir + "Sensors.json");
-        cm.setOutputDirPath(baseDir + "output/");
-        cm.setBaseDir(baseDir);
-        cm.setPathsCache(baseDir + "output/path-cache.csv");
+        cm.setMetaPeoplePath(Paths.get(baseDir, "MetaPeople.json").toString());
+        cm.setMetaEventsPath(Paths.get(baseDir, "MetaEvents.json").toString());
+        cm.setMetaSensorsPath(Paths.get(baseDir, "MetaSensors.json").toString());
+        cm.setPeoplePath(Paths.get(baseDir, "People.json").toString());
+        cm.setEventsPath(Paths.get(baseDir, "Events.json").toString());
+        cm.setSpacesPath(Paths.get(baseDir, "Spaces.json").toString());
+        cm.setSensorsPath(Paths.get(baseDir, "Sensors.json").toString());
+        cm.setOutputDirPath(Paths.get(baseDir, "output").toString() + 
+                FileSystems.getDefault().getSeparator());
+        cm.setBaseDir(Paths.get(baseDir).toString() + 
+                FileSystems.getDefault().getSeparator());
+        cm.setPathsCache(
+                Paths.get(baseDir, "output", "path-cache.csv").toString());
 
         cm.writeToFile();
     }

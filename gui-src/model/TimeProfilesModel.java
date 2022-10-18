@@ -3,6 +3,7 @@ package model;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -774,7 +775,8 @@ implements Iterable<model.TimeProfilesModel.TimeProfile> {
         if (!checkValid(true))
             return;
 
-        String fname = Model.getConfig().getBaseDir() + "TimeProfiles.json";
+        String fname = Paths.get(Model.getConfig().getBaseDir(), 
+                "TimeProfiles.json").toString();
 
         JSONArray data = new JSONArray();
 

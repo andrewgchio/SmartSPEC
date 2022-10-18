@@ -2,6 +2,7 @@ package model;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -527,7 +528,7 @@ public class ConfigModel {
             return;
 
         try {
-            String fname = baseDir + "config.txt";
+            String fname = Paths.get(baseDir, "config.txt").toString();
 
             MyFileWriter f = new MyFileWriter(fname);
 

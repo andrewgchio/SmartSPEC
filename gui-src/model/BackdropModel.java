@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -337,7 +338,8 @@ public class BackdropModel implements Iterable<model.BackdropModel.Backdrop> {
      */
     @SuppressWarnings("unchecked")
     public void writeToFile() {
-        String fname = Model.getConfig().getBaseDir() + "/Backdrops.json";
+        String fname = Paths.get(Model.getConfig().getBaseDir(), 
+                "Backdrops.json").toString();
 
         JSONArray data = new JSONArray();
 
